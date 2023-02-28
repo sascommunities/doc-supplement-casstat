@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: SPCGS1                                              */
+/*    NAME: SPCGS                                               */
 /*   TITLE: Mean and Range (X-Bar and R) Charts                 */
 /* PRODUCT: AACAS                                               */
 /*  SYSTEM: ALL                                                 */

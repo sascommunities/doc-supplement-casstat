@@ -4,7 +4,7 @@
 /*    NAME: assess_ex1                                          */
 /*   TITLE: Example 1 for PROC ASSESS                           */
 /*    DESC: Assess a Model with Two Levels  in Target           */
-/* PRODUCT: AACAS                                               */
+/* PRODUCT: VIYA Statistics                                     */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS:                                                     */
 /*   PROCS: ASSESS                                              */

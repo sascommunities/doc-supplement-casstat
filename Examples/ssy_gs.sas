@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: SIMSYS1                                             */
+/*    NAME: SSY_GS                                              */
 /*   TITLE: Getting Started Example for PROC SIMSYSTEM          */
 /* PRODUCT: STAT                                                */
 /*  SYSTEM: ALL                                                 */

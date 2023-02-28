@@ -9,7 +9,7 @@
 /*    KEYS: logistic regression analysis,                       */
 /*          odds ratios                                         */
 /*   PROCS: LOGSELECT                                           */
-/*                                                              */
+/*    DATA: Getting Started and Cheese                          */
 /*    MISC:                                                     */
 /*                                                              */
 /****************************************************************/
@@ -19,10 +19,10 @@ Example 5: Odds Ratios
 *****************************************************************/
 
 /*
-The data, from the Getting Started example (loggs1), consists of
-100 observations on a dichotomous response variable y, a character
-variable C, and 10 continuous variables x1--x10.  The ODDSRATIO
-statement is specified to compute odds ratios for various models.
+This example uses data that are examined in the Getting Started
+example (loggs1.sas) and in the Ordinal Logistic Regression example
+(logex4.sas) to demonstrate how you can use the ODDSRATIO statement
+to produce and customize odds ratios.
 */
 
 title 'Example 5: Odds Ratios';
@@ -131,17 +131,6 @@ F  0   5.4  4  1.5   2   1  1.8  70  0.4  5.5  3.6
 J  1  12.1  4  1.8  20  59  1.3  60  0.4    3  3.8
 ;
 
-/*
-The following data, used in the Ordinal Logistic Regression example
-(logex4), is from McCullagh and Nelder (1989, p.175) and were
-derived from an experiment concerned with the effect of four cheese
-additives on taste.  The nine response categories range from strong
-dislike (1) to excellent taste (9).  Let y be the response
-variable.  The variable Additive specifies the cheese additive (1,
-2, 3, or 4). The ODDSRATIO statement is specified to compute odds
-ratios for various models.
-*/
-
 data mycas.Cheese;
    do Additive = 1 to 4;
       input y1-y9;
@@ -153,8 +142,6 @@ data mycas.Cheese;
 1  1  6  8 23  7  5  1  0
 0  0  0  1  3  7 14 16 11
 ;
-
-title 'Example 5: Odds Ratios';
 
 proc logselect data=mycas.getStarted;
    model y(event='1') = x2 x5;

@@ -16,9 +16,10 @@
 
 data mycas.ex1;
    length id 8;
+   call streaminit(12345);
    do id=1 to 1000000;
-      x1 = ranuni(101);
-      x2 = 10*ranuni(201);
+      x1 = rand("Uniform");
+      x2 = rand("Uniform") * 10;
       output;
    end;
 run;

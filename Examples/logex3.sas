@@ -10,7 +10,6 @@
 /*          binary response data                                */
 /*   PROCS: LOGSELECT                                           */
 /*    DATA: Junk Email data set                                 */
-/*                                                              */
 /*    MISC:                                                     */
 /*                                                              */
 /****************************************************************/

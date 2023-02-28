@@ -10,7 +10,6 @@
 /*          polytomous response data                            */
 /*   PROCS: LOGSELECT                                           */
 /*    DATA: McCullagh and Nelder (1989, p.175)                  */
-/*                                                              */
 /*    MISC:                                                     */
 /*                                                              */
 /****************************************************************/

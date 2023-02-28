@@ -58,6 +58,12 @@ data mycas.marketdata;
   drop j;
 ;
 
+proc mbc data=mycas.marketdata nclusters=(2 3 4 5) noise=YES seed=1389035719;
+  var moninc mondebt tenancy ageyrs;
+  store mycas.mktgroups;
+  output out=mycas.marketscores maxpost copyvars=(moninc mondebt tenancy ageyrs);
+run;
+
 data mycas.newcusts;
 input moninc    mondebt    tenancy     ageyrs;
 datalines;
@@ -77,4 +83,7 @@ proc cas;
     nextclus='cluswt';
   run;
 quit;
+
+proc print data=mycas.newScores noobs;
+run;
 

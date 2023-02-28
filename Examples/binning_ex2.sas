@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: binning_e2                                          */
+/*    NAME: binning_ex2                                         */
 /*   TITLE: Example 2 for PROC BINNING                          */
 /*    DESC: Winsorized Binning                                  */
 /* PRODUCT: AACAS                                               */
@@ -16,10 +16,11 @@
 
 data mycas.ex2;
    length id 8;
+   call streaminit(12345);
    do id=1 to 10000;
-      x1 = ranuni(101);
-      x2 = 10*ranuni(201);
-      x3 = 100*ranuni(301);
+      x1 = rand("Uniform");
+      x2 = rand("Uniform") * 10;
+      x3 = rand("Uniform") * 100;
       output;
    end;
 run;

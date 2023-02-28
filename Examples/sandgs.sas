@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: sand1                                               */
+/*    NAME: SANDGS                                              */
 /*   TITLE: Getting Started Example for PROC SANDWICH           */
 /* PRODUCT: STAT                                                */
 /*  SYSTEM: ALL                                                 */
@@ -9,7 +9,7 @@
 /*   PROCS: SANDWICH                                            */
 /*    DATA:                                                     */
 /*                                                              */
-/*     REF:
+/*     REF:                                                     */
 /*    MISC:                                                     */
 /****************************************************************/
 

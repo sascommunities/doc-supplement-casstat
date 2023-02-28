@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: regselectgs                                         */
+/*    NAME: regselectEx3                                        */
 /*   TITLE: SCAD and MCP Examples for PROC REGSELECT            */
 /*    DESC: Statistics and Salaries of Major League             */
 /*             Baseball (MLB) Players in 1986                   */

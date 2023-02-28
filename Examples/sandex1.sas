@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: SANDWICH1                                           */
+/*    NAME: SANDEX1                                             */
 /*   TITLE: Example 1 for PROC SANDWICH                         */
 /*          Analysis of Microarray Data                         */
 /* PRODUCT: CASSTAT                                             */

@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: CORRELATION                                         */
+/*    NAME: cascorrgs                                           */
 /*   TITLE: Getting Started Example for PROC CORRELATION        */
 /* PRODUCT: AACAS                                               */
 /*  SYSTEM: ALL                                                 */

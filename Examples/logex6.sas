@@ -1,21 +1,20 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: genex3                                              */
-/*   TITLE: Example 3 for PROC GENSELECT                        */
-/* PRODUCT: STAT                                                */
+/*    NAME: logex6                                              */
+/*   TITLE: Example 6 for PROC LOGSELECT                        */
+/*    DESC: Binary Model with Repeated Measures                 */
+/* PRODUCT: VIYA Statistics                                     */
 /*  SYSTEM: ALL                                                 */
-/*    KEYS: Binary regression analysis, GEE                     */
-/*   PROCS: GENSELECT                                           */
+/*    KEYS: logistic regression analysis, GEE                   */
+/*   PROCS: LOGSELECT                                           */
 /*    DATA: Six Cities                                          */
-/*                                                              */
-/*     REF: SAS Visual Statistics Procedures, GENSELECT chapter */
 /*    MISC:                                                     */
 /*                                                              */
 /****************************************************************/
 
 /*****************************************************************
-Example 3: Binary regression with repeated measures
+Example 6: Binary logistic regression with repeated measures
 *****************************************************************/
 
 /*
@@ -24,9 +23,9 @@ The example fits a repeated measures model using generalizing
 estimating equations.
 */
 
-title 'Example 3: Binary Regression with Repeated Measures';
+title 'Example 6: Binary Regression with Repeated Measures';
 
-data mycas.six;
+data sascas1.six;
      input case city$ @@;
    do i=1 to 4;
       input age smoke wheeze @@;
@@ -51,9 +50,9 @@ data mycas.six;
 16 portage   9 1 1  10 1 1  11 2 0  12 1 0
 ;
 
-proc genselect data=mycas.six;
+proc logselect data=sascas1.six;
    class case city;
-   model wheeze(event='1') = city age smoke / dist=binary;
+   model wheeze(event='1') = city age smoke;
    repeated subject=case / type=exch covb corrw printmle;
 run;
 

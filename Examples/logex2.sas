@@ -10,7 +10,6 @@
 /*          Binomial response data                              */
 /*   PROCS: LOGSELECT                                           */
 /*    DATA: Cox and Snell (1989, pp 10-11)                      */
-/*                                                              */
 /*    MISC:                                                     */
 /*                                                              */
 /****************************************************************/

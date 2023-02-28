@@ -1,7 +1,7 @@
 /****************************************************************/
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
-/*    NAME: gamselgs1                                           */
+/*    NAME: gamselectgs1                                        */
 /*   TITLE: Getting Started Example 1 for PROC GAMSELECT        */
 /*    DESC: Generalized additive model selection by boosting    */
 /* PRODUCT: SAS Visual Statistics                              */

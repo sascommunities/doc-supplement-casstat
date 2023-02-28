@@ -3,12 +3,11 @@
 /*                                                              */
 /*    NAME: assess_gs                                           */
 /*   TITLE: Getting Started Example for PROC ASSESS             */
-/* PRODUCT: AACAS                                               */
+/* PRODUCT: VIYA Statistics                                     */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS:                                                     */
 /*   PROCS: ASSESS                                              */
-/*    DATA:                                                     */
-/*                                                              */
+/*    DATA:                                                     */                                                            */
 /*     REF:                                                     */
 /*    MISC: Example from the Getting Started section of the     */
 /*          ASSESS                                              */
