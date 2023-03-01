@@ -20,7 +20,7 @@ Example 3: Binary regression with repeated measures
 
 /*
 The data comes from the 'Six Cities' study (Ware et al. 1984).
-The example fits a repeated measures model using generalizing
+The example fits a repeated measures model using generalized
 estimating equations.
 */
 
