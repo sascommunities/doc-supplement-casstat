@@ -15,11 +15,11 @@
 /*                                                              */
 /****************************************************************/
 
-   data mycas.baseball;
+    data mycas.baseball;
       set sashelp.baseball;
-  run;
+    run;
 
-   proc regselect data=mycas.baseball;
+ proc regselect data=mycas.baseball;
        partition roleVar = league(train='National' validate = 'American');
        class division;
        model logSalary = division nAtBat nHits nHome nRuns nRBI nBB
@@ -36,9 +36,8 @@
           Summary.SelectedEffects = ex3scadSelectedEffects
           SelectedModel.FitStatistics = ex3scadFitStatistics
           SelectedModel.ParameterEstimates = ex3scadParameterEstimates;
-   run;
+ run;
 
-    %startprint(ex3scadInfoPrint);
     title "Basic Information about SCAD Selection";
     data _null_;
 	    set work.ex3scadNobs;
@@ -63,9 +62,7 @@
 	    file print ods = (template = 'ACAS.REGSELECT.SelectionInfo');
          put _ods_;
     run;
-    %endprint;
 
-    %startprint(ex3scadSummaryPrint);
     data _null_;
        set work.ex3scadSummary;
        if _n_ le 13  or  _n_ ge 31;
@@ -102,10 +99,9 @@
 	    file print ods = (template = 'ACAS.REGSELECT.ParameterEstimates');
          put _ods_;
     run;
-    %endprint;
     ods graphics off;
 
-   proc regselect data=mycas.baseball;
+ proc regselect data=mycas.baseball;
        partition roleVar = league(train='National' validate='American');
        class division;
        model logSalary = division nAtBat nHits nHome nRuns nRBI nBB
@@ -113,14 +109,14 @@
                          crBB nOuts nAssts nError;
        selection  method = scad(alpha=2.7 solver=NLP
                   choose=validate) details=all;
-   run;
+ run;
 
-   proc regselect data=mycas.baseball;
+ proc regselect data=mycas.baseball;
        partition roleVar = league(train='National' validate='American');
        class division;
        model logSalary = division nAtBat nHits nHome nRuns nRBI nBB
                          yrMajor crAtBat crHits crHome crRuns crRbi
                          crBB nOuts nAssts nError;
        selection  method = mcp(alpha=1.7 choose=validate) details=all;
-   run;
+ run;
 
