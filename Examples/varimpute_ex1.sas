@@ -13,22 +13,22 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
    id = _N_;
 run;
 
-proc varimpute data=mycas.hmeq seed=12345;
+proc varimpute data=mylib.hmeq seed=12345;
    input derog clno/ctech=value cvalues=5,20;
    input value /ctech=mean;
    input job/ntech=mode;
    input mortdue /ctech=median;
    input ninq /ctech=random;
    input reason/ntech=value valuescharacter=unknown;
-   output out=mycas.out1 copyvar=(id);
+   output out=mylib.out1 copyvar=(id);
 run;
 
-data out2; set mycas.out1; run;
+data out2; set mylib.out1; run;
 proc sort data=out2; by id; run;
 proc print data=out2(firstobs=110 obs=124);
 run;

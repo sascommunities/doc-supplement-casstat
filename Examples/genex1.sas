@@ -29,7 +29,7 @@ to select the variables for use in a main effects log linked
 Poisson regression model of these data.
 */
 
-data mycas.getStarted;
+data mylib.getStarted;
   input C1-C5 Y Total;
   datalines;
 0 3 1 1 3 2 28.361
@@ -136,7 +136,7 @@ data mycas.getStarted;
 
 ods graphics on;
 
-proc genselect data=mycas.getStarted;
+proc genselect data=mylib.getStarted;
    class C1-C5;
    model Y = C1-C5 / Distribution=Poisson;
    selection method=forward details=all plots=all;

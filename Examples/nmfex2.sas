@@ -36,19 +36,19 @@ for idx, rowSeries in df.iterrows():
    val = rowSeries.values
    mat[val[0]-1, val[1]] = val[2]
 
-# transfer data to a SAS data table in CAS
+# transfer data to a SAS data table
 cols = ['UserID'] + ['M%d' %i for i in range(1, ncol)]
 matdf = pd.DataFrame(mat, columns=cols)
 
-SAS.df2sd(matdf, 'mycas.ratings')
+SAS.df2sd(matdf, 'mylib.ratings')
 
    endsubmit;
 run;
 
-proc nmf data=mycas.ratings rank=19 seed=6789
+proc nmf data=mylib.ratings rank=19 seed=6789
          method=apg(maxiter=600) reg=L2(alpha=5 beta=5);
    var m:;
-   impute out=mycas.outX imputedRowsOnly predOnly copyvar=UserID;
+   impute out=mylib.outX imputedRowsOnly predOnly copyvar=UserID;
 run;
 
 proc python;
@@ -59,7 +59,7 @@ import numpy as np
 import csv
 
 # fetch the first 10 observations
-df = SAS.sd2df('mycas.outX(obs=10)')
+df = SAS.sd2df('mylib.outX(obs=10)')
 
 # load information about the movies
 movieDict = {}

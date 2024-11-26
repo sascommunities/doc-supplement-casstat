@@ -14,7 +14,7 @@
 /*          BINNING                                             */
 /****************************************************************/
 
-data mycas.bucket;
+data mylib.bucket;
    length id 8;
    call streaminit(12345);
    do id=1 to 1000;
@@ -25,8 +25,8 @@ data mycas.bucket;
    end;
 run;
 
-proc binning data=mycas.bucket numbin=10 method=bucket;
+proc binning data=mylib.bucket numbin=10 method=bucket;
    input x1-x3;
-   output out=mycas.out;
+   output out=mylib.out;
 run;
 

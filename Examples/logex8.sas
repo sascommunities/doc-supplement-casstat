@@ -19,32 +19,37 @@ Example 8: Modeling Microarray Data
 *****************************************************************/
 
 /*
-The Sashelp.LeuTrain and Sashelp.LeuTest data sets come from a cancer
-study that classifies whether a patient has type 1 leukemia (acute
-lymphoblastic leukemia) or type 2 leukemia (acute myeloid
-leukemia). The Sashelp.LeuTrain data set contains 38 samples for model
-training and each sample contains 7129 gene expression
-measurements. The Sashelp.LeuTest data set contains 34 samples for
-testing prediction accuracy. The response variable is coded as 1 for
-type 1 leukemia and -1 for type 2 leukemia.
+The Sashelp.LeuTrain and Sashelp.LeuTest data sets come from a
+cancer study that classifies whether a patient has type 1 leukemia
+(acute lymphoblastic leukemia) or type 2 leukemia (acute myeloid
+leukemia). The Sashelp.LeuTrain data set contains 38 samples for
+model training and each sample contains 7129 gene expression
+measurements. The Sashelp.LeuTest data set contains 34 samples for 
+testing prediction accuracy. The response variable is coded as 1 
+for type 1 leukemia, and -1 for type 2 leukemia.
 */
 
 title 'Example 8: Modeling Microarray Data with Elastic Net';
 
-data mycas.LeuTrain;
+data LeuTrain;
    set Sashelp.LeuTrain;
+   call streamInit(123);
+   if rand('UNIFORM')<0.6 then role='train'; else role='valid';
 run;
-data mycas.LeuTest;
+data mylib.LeuTrain;
+   set LeuTrain;
+run;
+data mylib.LeuTest;
    set Sashelp.LeuTest;
 run;
 
-proc logselect data=mycas.LeuTrain partfit;
+proc logselect data=mylib.LeuTrain partfit;
    model y=x1-x7129;
-   selection method=elasticnet(choose=validate fconv=1e-6 gconv=1e-6);
-   partition fraction(valid=0.4 seed=123);
-   store mycas.ElasticNetModel / note="Microarray data with Elastic Net.";
+   selection method=elasticnet(choose=validate);
+   partition role=role(train='train' validate='valid');
+   store mylib.ElasticNetModel / note="Microarray data with Elastic Net.";
 run;
 
-proc logselect restore=mycas.ElasticNetModel data=mycas.LeuTest partfit;
+proc logselect restore=mylib.ElasticNetModel data=mylib.LeuTest partfit;
 run;
 

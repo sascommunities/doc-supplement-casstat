@@ -20,7 +20,7 @@
 %let nGene   = 500;
 %let nTrt    = 2;
 
-data mycas.microarray;
+data mylib.microarray;
    keep  Microarray Array Gene Trt Dye Density;
    array GeneDist{&ngene};
    array ArrayEffect{&narray};
@@ -54,7 +54,7 @@ run;
 
 
 ods select Dimensions ModelAnova ModelInfo;
-proc sandwich data=mycas.microarray sparse;
+proc sandwich data=mylib.microarray sparse;
    class Microarray Gene Trt Dye;
    model Density = Gene Trt Dye Gene*Trt Gene*Dye/ss3;
    cluster Microarray;

@@ -13,18 +13,18 @@
 /*    MISC:Example -- Oversampling                              */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
 run;
 
-proc partition data=mycas.hmeq samppctevt=90 eventprop=0.5
+proc partition data=mylib.hmeq samppctevt=90 eventprop=0.5
                event="1" seed=10 nthreads=1;
    by BAD;
    ods output OVERFREQ=outFreq;
-   output out=mycas.out4 copyvars=(job loan value delinq derog)
+   output out=mylib.out4 copyvars=(job loan value delinq derog)
           freqname=_Freq2_;
 run;
 
-proc print data=mycas.out4(obs=20);
+proc print data=mylib.out4(obs=20);
 run;
 

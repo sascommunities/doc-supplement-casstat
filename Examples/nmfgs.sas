@@ -19,16 +19,16 @@ proc contents data=sashelp.JunkMail varnum;
    ods select position;
 run;
 
-data mycas.emails;
+data mylib.emails;
    set sashelp.JunkMail;
    drop test class capavg caplong captotal;
 run;
 
-proc nmf data=mycas.emails seed=789 rank=5 outh=mycas.H;
-   output out=mycas.W;
+proc nmf data=mylib.emails seed=789 rank=5 outh=mylib.H;
+   output out=mylib.W;
 run;
 
-proc transpose data=mycas.H out=H2 name=Term prefix=Topic;
+proc transpose data=mylib.H out=H2 name=Term prefix=Topic;
    id _Index_;
 run;
 

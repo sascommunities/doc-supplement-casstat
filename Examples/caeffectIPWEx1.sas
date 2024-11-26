@@ -14,19 +14,19 @@
 /*                                                              */
 /****************************************************************/
 
-proc logselect data=mycas.SmokingWeight;
+proc logselect data=mylib.SmokingWeight;
    class Sex Race Education Exercise Activity;
    model Quit = Sex Race Education Exercise
                 Activity Age YearsSmoke PerDay;
-   store out=mycas.logTrtModel;
+   store out=mylib.logTrtModel;
 run;
 
 proc astore;
-   score data=mycas.SmokingWeight out=mycas.logScored
-         rstore=mycas.logTrtModel copyvars=(Quit Change);
+   score data=mylib.SmokingWeight out=mylib.logScored
+         rstore=mylib.logTrtModel copyvars=(Quit Change);
 run;
 
-proc caeffect data=mycas.logScored inference;
+proc caeffect data=mylib.logScored inference;
    treatvar Quit;
    outcomevar Change;
    pom treatlev = 1 treatProb = P_Quit1;
@@ -34,7 +34,7 @@ proc caeffect data=mycas.logScored inference;
    difference reflev=0;
 run;
 
-proc caeffect data=mycas.logScored;
+proc caeffect data=mylib.logScored;
    treatvar Quit / condevent=1;
    outcomevar Change;
    pom treatlev = 1 treatProb = P_Quit1;

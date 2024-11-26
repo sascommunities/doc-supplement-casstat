@@ -14,16 +14,16 @@
 /*                                                             */
 /***************************************************************/
 
-data mycas.baseball;
+data mylib.baseball;
   Set sashelp.baseball;
   Keep Team League Division Position Div;
 Run;
 
 
-proc kclus data=mycas.baseball maxiter=10 maxc=5 DISTANCENOM=RELATIVEFREQ
-   outstat(outiter)=mycas.kclusOutstat2;
+proc kclus data=mylib.baseball maxiter=10 maxc=5 DISTANCENOM=RELATIVEFREQ
+   outstat(outiter)=mylib.kclusOutstat2;
 input Team League Division Position Div / level=nominal;
-score out=mycas.kclusOut2 copyvars=(Team League Division Position Div);
+score out=mylib.kclusOut2 copyvars=(Team League Division Position Div);
 ods output FreqNom=FreqNom1;
 run;
 

@@ -33,7 +33,7 @@ proc simsystem n=30 system=johnson seed=12345 noprint nrep=1000;
       StdDev   =  17.0 20.0 23.0
       Skewness =  -1.0 -0.5  0.0
       Kurtosis =   2.3  3.1  3.9;
-   output out=mycas.Sim_raw Mean=Mean Std=StdDev;
+   output out=mylib.Sim_raw Mean=Mean Std=StdDev;
 run;
 
 proc ds2 sessref=mysess;
@@ -91,10 +91,10 @@ proc ds2 sessref=mysess;
 run;
 quit;
 
-proc mdsummary data=mycas.Success;
+proc mdsummary data=mylib.Success;
    groupby Mean StdDev Skewness Kurtosis SimIndex;
    var Success;
-   output out=mycas.ProbSuccess;
+   output out=mylib.ProbSuccess;
 run;
 
 proc cas;
@@ -108,7 +108,7 @@ quit;
 / Use response surface methods to analyze simulated success rates.
 /---------------------------------------------------------------------*/
 
-proc rsreg data=mycas.ProbSuccess plots=contour(nodesign);
+proc rsreg data=mylib.ProbSuccess plots=contour(nodesign);
    model ProbSuccess = Mean StdDev Skewness Kurtosis;
    ods select FactorANOVA Contour;
 run;

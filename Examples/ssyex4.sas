@@ -68,7 +68,7 @@ proc simsystem n=10000 system=pearson seed=1 plot(only)=mrmap(skewscale=skewness
                    2.1   2.5
                    3     3.5
                    6    10;
-   output out=mycas.GARCHSim_error;
+   output out=mylib.GARCHSim_error;
 run;
 
 proc cas;
@@ -113,13 +113,13 @@ enddata;
 run;
 quit;
 
-proc autoreg data=mycas.GARCHSim noprint;
+proc autoreg data=mylib.GARCHSim noprint;
    by notsorted Skewness Kurtosis;
    model ReturnRate = / noint garch=(p=1, q=1);
-   output out=mycas.g11 alphacli=%sysevalf(2*0.05) lcl=lcl;
+   output out=mylib.g11 alphacli=%sysevalf(2*0.05) lcl=lcl;
 run;
 
-data g11; set mycas.g11;
+data g11; set mylib.g11;
    AtRisk = (ReturnRate < lcl);
 proc summary data=g11 mean;
    class Kurtosis Skewness;

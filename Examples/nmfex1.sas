@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.ex1Data;
+data mylib.ex1Data;
    infile datalines delimiter='|' missover;
    length text $150;
    input text$ did;
@@ -36,21 +36,21 @@ data mycas.ex1Data;
       Serves as the basis for innovation causing revenue growth.         | 16
 run;
 
-proc textmine data=mycas.ex1Data;
+proc textmine data=mylib.ex1Data;
    doc_id     did;
    variables  text;
-   parse      stop      = mycas.en_stoplist
-              outterms  = mycas.terms
-              outparent = mycas.termdoc
+   parse      stop      = mylib.en_stoplist
+              outterms  = mylib.terms
+              outparent = mylib.termdoc
               reducef   = 1;
 run;
 
-data terms; set mycas.terms; keep Term Key;
+data terms; set mylib.terms; keep Term Key;
    rename Key=_termnum_;
 run;
 proc sort data=terms; by _termnum_; run;
 
-data termdoc; set mycas.termdoc; run;
+data termdoc; set mylib.termdoc; run;
 proc sort data=termdoc; by _termnum_ _document_; run;
 
 data termdoc1; merge terms termdoc; by _termnum_;
@@ -62,7 +62,7 @@ proc sql noprint;
 run;
 %let maxid = &max_docid;
 
-data mycas.termdoc2;
+data mylib.termdoc2;
    length id 8;
    array docs{&maxid} doc1 - doc&maxid;
    retain doc1 - doc&maxid;
@@ -79,9 +79,9 @@ data mycas.termdoc2;
    drop i _termnum_ _document_ _count_;
 run;
 
-proc nmf data=mycas.termdoc2 seed=789 rank=5 outh=mycas.H;
+proc nmf data=mylib.termdoc2 seed=789 rank=5 outh=mylib.H;
    var doc1-doc&maxid;
-   output out=mycas.W comp=Topic copyvar=Term;
+   output out=mylib.W comp=Topic copyvar=Term;
 run;
 
 proc cas;

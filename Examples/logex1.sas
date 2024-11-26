@@ -28,7 +28,7 @@ main effects binary logistic regression model of these data.
 */
 
 title 'Example 1: Model Selection';
-data mycas.getStarted;
+data mylib.getStarted;
    input C$ y x1-x10;
    datalines;
 D  0  10.2  6  1.6  38  15  2.4  20  0.8  8.5  3.9
@@ -135,7 +135,7 @@ J  1  12.1  4  1.8  20  59  1.3  60  0.4    3  3.8
 
 ods graphics on;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    class C;
    model y = C x1-x10;
    selection method=forward details=all plots=all;

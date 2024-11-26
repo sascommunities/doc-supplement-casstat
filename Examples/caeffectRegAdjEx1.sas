@@ -14,56 +14,56 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.birthwgt;
+data mylib.birthwgt;
    set sashelp.birthwgt;
 run;
 
-proc gradboost data=mycas.birthwgt ntrees=100 seed=8959;
+proc gradboost data=mylib.birthwgt ntrees=100 seed=8959;
    target Death / level=nominal;
    input  Smoking AgeGroup Married Drinking
           SomeCollege /level=nominal;
-   savestate rstore=mycas.gbOutMod;
+   savestate rstore=mylib.gbOutMod;
 run;
 
-proc caeffect data=mycas.birthwgt;
+proc caeffect data=mylib.birthwgt;
    treatvar Smoking;
    outcomevar Death( event='Yes') / type=Categorical;
-   outcomemodel restore=mycas.gbOutMod predname=P_DeathYes;
+   outcomemodel restore=mylib.gbOutMod predname=P_DeathYes;
    pom treatlev='Yes';
    pom treatlev='No';
 run;
 
-data mycas.gbPredData;
-   set mycas.birthwgt;
+data mylib.gbPredData;
+   set mylib.birthwgt;
    tempSmoking = Smoking;
    Smoking = 'Yes';
 run;
 
 proc astore;
-   score data=mycas.gbPredData out=mycas.gbPredData
-         rstore=mycas.gbOutMod
+   score data=mylib.gbPredData out=mylib.gbPredData
+         rstore=mylib.gbOutMod
          copyvars=(tempSmoking AgeGroup Married
                    Drinking SomeCollege Death);
 run;
 
-data mycas.gbPredData;
-   set mycas.gbPredData;
+data mylib.gbPredData;
+   set mylib.gbPredData;
    rename P_DeathYes = SmokingPred;
    Smoking = 'No';
 run;
 
 proc astore;
-   score data=mycas.gbPredData out=mycas.gbPredData
-         rstore=mycas.gbOutMod
+   score data=mylib.gbPredData out=mylib.gbPredData
+         rstore=mylib.gbOutMod
          copyvars=(tempSmoking SmokingPred Death);
 run;
 
-data mycas.gbPredData;
-   set mycas.gbPredData;
+data mylib.gbPredData;
+   set mylib.gbPredData;
    rename P_DeathYes = NoSmokingPred tempSmoking=Smoking;
 run;
 
-proc caeffect data=mycas.gbPredData;
+proc caeffect data=mylib.gbPredData;
    treatvar Smoking;
    outcomevar Death( event='Yes') / type=Categorical;
    pom treatlev='Yes' predOut=SmokingPred;

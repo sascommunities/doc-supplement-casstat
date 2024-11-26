@@ -26,7 +26,7 @@ to produce and customize odds ratios.
 */
 
 title 'Example 5: Odds Ratios';
-data mycas.getStarted;
+data mylib.getStarted;
    input C$ y x1-x10;
    datalines;
 D  0  10.2  6  1.6  38  15  2.4  20  0.8  8.5  3.9
@@ -131,7 +131,7 @@ F  0   5.4  4  1.5   2   1  1.8  70  0.4  5.5  3.6
 J  1  12.1  4  1.8  20  59  1.3  60  0.4    3  3.8
 ;
 
-data mycas.Cheese;
+data mylib.Cheese;
    do Additive = 1 to 4;
       input y1-y9;
       output;
@@ -143,38 +143,38 @@ data mycas.Cheese;
 0  0  0  1  3  7 14 16 11
 ;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    model y(event='1') = x2 x5;
    oddsratio;
 run;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    model y(event='1') = x2|x5;
    oddsratio;
 run;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    model y(event='1') = x2|x5;
    oddsratio x2(at(x5=1)) x5(at(x2=3));
 run;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    model y(event='1') = x2|x5;
    oddsratio x2 x5 / at(x5=1 x2=3);
 run;
 
-proc logselect data=mycas.getStarted;
+proc logselect data=mylib.getStarted;
    model y(event='1') = x2|x5;
    oddsratio x2(unit=5) x5 / unit(x2=2 3 x5=4);
 run;
 
-proc logselect data=mycas.Cheese;
+proc logselect data=mylib.Cheese;
    class Additive(ref='4') / param=ref;
    model y1-y9=Additive;
    oddsratio;
 run;
 
-proc logselect data=mycas.Cheese;
+proc logselect data=mylib.Cheese;
    class Additive(ref='4') / param=ref;
    model y1-y9=Additive;
    oddsratio / diff=all;

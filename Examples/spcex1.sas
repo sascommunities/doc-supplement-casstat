@@ -12,15 +12,15 @@
 /*                                                              */
 /****************************************************************/
 
-proc spc data=mycas.AllProcesses;
+proc spc data=mylib.AllProcesses;
    xrchart / noprint
-             outtable  = mycas.AllTable
-             outlimits = mycas.AllLimits;
+             outtable  = mylib.AllTable
+             outlimits = mylib.AllLimits;
 run;
 
-proc print data=mycas.AllTable(obs=10) noobs;
+proc print data=mylib.AllTable(obs=10) noobs;
 run;
 
-proc print data=mycas.AllLimits noobs;
+proc print data=mylib.AllLimits noobs;
 run;
 

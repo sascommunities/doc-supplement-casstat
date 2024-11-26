@@ -14,22 +14,22 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.cars;
+data mylib.cars;
    set sashelp.cars;
 run;
 
 title 'Cars data with a user-defined format with an ASC order';
-proc cardinality data=mycas.cars outcard=mycas.card
-                 outdetails=mycas.details maxlevels=5;
+proc cardinality data=mylib.cars outcard=mylib.card
+                 outdetails=mylib.details maxlevels=5;
    var engineSize /order=asc;
 run;
 
-proc print data=mycas.card ;
+proc print data=mylib.card ;
    var _varname_ _order_ _more_ _cardinality_;
 run;
 
 data details(drop=_rawchar_);
-   set mycas.details;
+   set mylib.details;
    if _index_ = . then do;
       _cfmt_ = cats(">",  put(_rawnum_,best12.));
       _rawnum_ = .;

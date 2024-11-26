@@ -13,7 +13,7 @@
 /*          ASSESS                                              */
 /****************************************************************/
 
-data mycas.score;
+data mylib.score;
    input _PartInd_ good p_good;
    datalines;
 0 0.8224 0.7590
@@ -28,7 +28,7 @@ data mycas.score;
 1 0.6064 0.7355
 ;
 
-proc assess data=mycas.score nbins=2;
+proc assess data=mylib.score nbins=2;
    var p_good;
    target good;
    by _PartInd_;

@@ -14,7 +14,7 @@
 
 %let nTotalObs=15000;
 %let seed=1;
-data mycas.analysisData / sessref=mysess single=no;
+   data mylib.analysisData;
     drop i j c3Num nObsPerThread nExtras rew;
     length c3$ 7;
 
@@ -55,43 +55,42 @@ data mycas.analysisData / sessref=mysess single=no;
        else                     Role = 'TEST';
 
        output;
-   end;
+    end;
+   run;
+
+data work.analysisData;
+   set mylib.analysisData;
+run;
+proc summary data=work.analysisData;
+   class role;
+   ways 1;
+   var error;
+   output out=ASE uss=uss n=n;
+data ASE; set ASE;
+   OracleASE = uss / n;
+   label OracleASE = 'Oracle ASE';
+   keep Role OracleASE;
 run;
 
-  data work.analysisData;
-      set mycas.analysisData;
- run;
- proc summary data=work.analysisData;
-    class role;
-    ways 1;
-    var error;
-    output out=ASE uss=uss n=n;
- data ASE; set ASE;
-    OracleASE = uss / n;
-    label OracleASE = 'Oracle ASE';
-    keep Role OracleASE;
- run;
+proc print data=ASE label noobs;
+run;
 
- proc print data=ASE label noobs;
- run;
-
- ods graphics on;
- proc regselect data=mycas.analysisData;
-    partition roleVar=role(train='TRAIN' validate='VAL' test='TEST');
-    class c1 c2 c3;
-    model y =  c1|c2|c3|x1|x2|x3|x4|x5|x5|x6|x7|x8|x9|x10
+ods graphics on;
+proc regselect data=mylib.analysisData;
+   partition roleVar=role(train='TRAIN' validate='VAL' test='TEST');
+   class c1 c2 c3;
+   model y =  c1|c2|c3|x1|x2|x3|x4|x5|x5|x6|x7|x8|x9|x10
               |x11|x12|x13|x14|x15|x16|x17|x18|x19|x20 @2 /stb;
-    selection method = stepwise(select=sl sle=0.1 sls=0.15 choose=validate)
+   selection method = stepwise(select=sl sle=0.1 sls=0.15 choose=validate)
                        hierarchy=single details=steps plots(startstep=5)=all;
- run;
+run;
 
- proc regselect data=mycas.analysisData;
-    partition roleVar=role(train='TRAIN' validate='VAL' test='TEST');
-    class c1(split) c2 c3;
-    model y =  c1|c2|c3|x1|x2|x3|x4|x5|x5|x6|x7|x8|x9|x10
-              |x11|x12|x13|x14|x15|x16|x17|x18|x19|x20 @2 /stb;
-    selection method = stepwise(select=sl sle=0.1 sls=0.15 choose=validate)
-                       hierarchy=single details=steps;
- run;
- ods graphics off;
+proc regselect data=mylib.analysisData;
+   partition roleVar=role(train='TRAIN' validate='VAL' test='TEST');
+   class c1(split) c2 c3;
+   model y = c1|c2|c3|x1|x2|x3|x4|x5|x5|x6|x7|x8|x9|x10
+             |x11|x12|x13|x14|x15|x16|x17|x18|x19|x20 @2 /stb;
+   selection method = stepwise(select=sl sle=0.1 sls=0.15 choose=validate)
+             hierarchy=single details=steps;
+run;
 

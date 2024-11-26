@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.ex4;
+data mylib.ex4;
    input cl1 $ cl2  x1  x2  y  freq id;
    datalines;
 a     2    3   7  9   2   1
@@ -29,7 +29,7 @@ b     1    6   4  8   1   9
 b     2    3   2  6   3   10
 ;
 
-proc binning data=mycas.ex4 numbin=4 method=cutpts;
+proc binning data=mylib.ex4 numbin=4 method=cutpts;
    input x2/cutpts(2, 2.3, 4.5);
    input x1/numbin=3 cutpts(3.1, 5);
 run;

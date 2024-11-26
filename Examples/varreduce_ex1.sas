@@ -14,11 +14,11 @@
 /*    MISC:                                                         */
 /********************************************************************/
 
-data mycas.heart;
+data mylib.heart;
    set sashelp.heart;
 run;
 
-proc varreduce data=mycas.heart matrix=COV tech=DSC;
+proc varreduce data=mylib.heart matrix=COV tech=DSC;
    ods output SelectionSummary=Summary;
    class Status Sex Chol_Status BP_Status Weight_Status Smoking_Status;
    reduce supervised Status = Sex AgeAtStart Height Weight Diastolic Systolic MRW

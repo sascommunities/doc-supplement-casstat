@@ -16,7 +16,7 @@
 /*                                                              */
 /****************************************************************/
 
-proc phselect data=mycas.getStarted;
+proc phselect data=mylib.getStarted;
    class C1 C2;
    model Time*Status(0) = C1 C2 X1-X4;
    strata C3;
@@ -24,7 +24,7 @@ proc phselect data=mycas.getStarted;
 run;
 
 data Scores;
-   set mycas.getStarted;
+   set mylib.getStarted;
    %inc 'ScoreCode.txt';
 run;
 

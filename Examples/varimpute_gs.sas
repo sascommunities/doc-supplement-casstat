@@ -14,17 +14,17 @@
 /*          VARIMPUTE                                             */
 /******************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
 run;
 
-proc varimpute data=mycas.hmeq seed=18000;
+proc varimpute data=mylib.hmeq seed=18000;
    input clage /ctech=mean;
    input delinq/ctech=median;
    input ninq/ctech=random;
    input reason/ntech=mode;
    input job/ntech=value valuescharacter=Office;
    input debtinc yoj/ctech=value cvalues=50,100;
-   output out=mycas.out;
+   output out=mylib.out;
 run;
 

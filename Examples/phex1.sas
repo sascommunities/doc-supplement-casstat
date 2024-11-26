@@ -30,7 +30,7 @@ main effects cox regression model of these data.
 
 title 'Example 1: Model Selection';
 
-data mycas.getStarted;
+data mylib.getStarted;
    input Time Status C1$ C2 C3$ X1-X4;
    datalines;
 53       0      Low          1    M     1.11    2.000    3.6128    12.0
@@ -137,7 +137,7 @@ data mycas.getStarted;
 
 ods graphics on;
 
-proc phselect data=mycas.getStarted;
+proc phselect data=mylib.getStarted;
    class C1-C3;
    model Time*Status(0) = C1-C3 X1-X4;
    selection method=forward(stop=sbc select=sbc) details=all plots=all;

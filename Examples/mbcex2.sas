@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.fish (drop=HtPct WidthPct);
+data mylib.fish (drop=HtPct WidthPct);
    input Species Weight Length1 Length2 Length3 HtPct WidthPct @@;
 
    *** transform variables;
@@ -110,29 +110,29 @@ data mycas.fish (drop=HtPct WidthPct);
 7   19.7 13.2 14.3 15.2 18.9 13.6 7   19.9 13.8 15.0 16.2 18.1 11.6
 ;
 
-proc mbc data=mycas.fish seed=9982346 covstruct=(eee eei eev eii evi evv vii vvi vvv)
+proc mbc data=mylib.fish seed=9982346 covstruct=(eee eei eev eii evi evv vii vvi vvv)
   nclusters=3;
   var height width weight3;
 run;
 
-proc mbc data=mycas.fish seed=9982346 init=kmeans
+proc mbc data=mylib.fish seed=9982346 init=kmeans
          covstruct=(eee eei eev eii evi evv vii vvi vvv)
   nclusters=3;
   var height width weight3;
 run;
 
-proc sgplot data=mycas.fish;
+proc sgplot data=mylib.fish;
   scatter x=height y=width / group=species;
 run; quit;
 
-data mycas.fishlbl;
-   set mycas.fish;
+data mylib.fishlbl;
+   set mylib.fish;
   if      (species in (6,7)) then do; z1=1; z2=0; z3=0; end;
   else if (species in (1,4)) then do; z1=0; z2=1; z3=0; end;
   else                            do; z1=0; z2=0; z3=1; end;
 ;
 
-proc mbc data=mycas.fishlbl
+proc mbc data=mylib.fishlbl
          covstruct=(eee eei eev eii evi evv vii vvi vvv)
   nclusters=3;
   var height width weight3;

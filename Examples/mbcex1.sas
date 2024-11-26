@@ -15,7 +15,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.marketdata;
+data mylib.marketdata;
   label moninc  = 'Monthly Income'
         mondebt = 'Monthly Debt'
         tenancy = 'Months at Current Residence'
@@ -58,13 +58,13 @@ data mycas.marketdata;
   drop j;
 ;
 
-proc mbc data=mycas.marketdata nclusters=(2 3 4 5) noise=YES seed=1389035719;
+proc mbc data=mylib.marketdata nclusters=(2 3 4 5) noise=YES seed=1389035719;
   var moninc mondebt tenancy ageyrs;
-  store mycas.mktgroups;
-  output out=mycas.marketscores maxpost copyvars=(moninc mondebt tenancy ageyrs);
+  store mylib.mktgroups;
+  output out=mylib.marketscores maxpost copyvars=(moninc mondebt tenancy ageyrs);
 run;
 
-data mycas.newcusts;
+data mylib.newcusts;
 input moninc    mondebt    tenancy     ageyrs;
 datalines;
  7      5      20      35
@@ -84,6 +84,6 @@ proc cas;
   run;
 quit;
 
-proc print data=mycas.newScores noobs;
+proc print data=mylib.newScores noobs;
 run;
 

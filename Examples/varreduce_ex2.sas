@@ -14,7 +14,7 @@
 /*    MISC:                                                         */
 /********************************************************************/
 
-data mycas.data1;
+data mylib.data1;
    array x{2};
    array c{2};
    do i=1 to 2000;
@@ -29,11 +29,11 @@ run;
 
 title  "Output the Correlation Matrix";
 
-proc varreduce data=mycas.data1 matrix=corr outcp=mycas.corr;
+proc varreduce data=mylib.data1 matrix=corr outcp=mylib.corr;
    class a;
    reduce unsupervised a x1-x2 /maxsteps=4;
 run;
 
-proc print data=mycas.corr;
+proc print data=mylib.corr;
 run;
 

@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.Temperature;
+data mylib.Temperature;
    length Cityid $ 2;
    title 'Mean Temperature of Selected Cities in January and July';
    input City $1-15 January July;
@@ -86,8 +86,8 @@ Cheyenne        26.6 69.1
 ;
 
 title 'Mean Temperature of Selected Cities in January and July';
-proc pca data=mycas.Temperature cov;
+proc pca data=mylib.Temperature cov;
    var July January;
-   output out=mycas.Scores copyVars=Cityid;
+   output out=mylib.Scores copyVars=Cityid;
 run;
 

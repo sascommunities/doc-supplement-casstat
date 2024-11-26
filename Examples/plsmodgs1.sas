@@ -17,7 +17,7 @@
 
 title 'Getting Started: Predicting Biological Activity';
 
-data mycas.Sample;
+data mylib.Sample;
    input obsnam $ v1-v27 ls ha dt Role $5. @@;
    datalines;
 EM1   2766 2610 3306 3630 3600 3438 3213 3051 2907 2844 2796
@@ -72,18 +72,18 @@ EM16  4017 4725 6090 6570 6354 5895 5346 4911 4611 4422 4314
 
 /* Fitting a PLS Model */
 
-proc plsmod data=mycas.sample;
+proc plsmod data=mylib.sample;
    model ls ha dt = v1-v27;
 run;
 
 /* Selecting the Number of Factors by Test Set Validation */
 
-proc plsmod data=mycas.sample;
+proc plsmod data=mylib.sample;
    model ls ha dt = v1-v27;
    partition roleVar = Role(train='TRAIN' test='TEST');
 run;
 
-proc plsmod data=mycas.sample cvtest(pval=0.15 seed=12345);
+proc plsmod data=mylib.sample cvtest(pval=0.15 seed=12345);
    model ls ha dt = v1-v27;
    partition roleVar = Role(train='TRAIN' test='TEST');
 run;
@@ -101,17 +101,17 @@ EM25  2904 2997 3255 3150 2922 2778 2700 2646 2571
        795  648  525  426  351  291  240  204  162
 ;
 
-data mycas.all;
-   set mycas.sample newobs;
+data mylib.all;
+   set mylib.sample newobs;
 run;
 
-proc plsmod data=mycas.all nfac=2;
+proc plsmod data=mylib.all nfac=2;
    model ls ha dt = v1-v27;
    partition roleVar = Role(train='TRAIN' test='TEST');
-   output out=mycas.result pred=p copyvars=(obsnam);
+   output out=mylib.result pred=p copyvars=(obsnam);
 run;
 
-proc print data=mycas.result;
+proc print data=mylib.result;
    where (obsnam in ('EM17','EM25'));
    var obsnam p_ls p_ha p_dt;
 run;

@@ -19,14 +19,14 @@
 
 proc simsystem system=Johnson n=10000 seed=12345;
    moments mean=5 stddev=2 skew=1 kurt=4.5;
-   output out=mycas.SB;
+   output out=mylib.SB;
 run;
 
 /*
 / Use UNIVARIATE to fit in SB distribution.
 /---------------------------------------------------------------------*/
 
-proc univariate data=mycas.SB;
+proc univariate data=mylib.SB;
    var variate;
    histogram / sb(theta=est sigma=est fitmethod=moments) noplot;
 run;

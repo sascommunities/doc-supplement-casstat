@@ -19,18 +19,18 @@ proc contents varnum data=sashelp.baseball;
    ods select position;
 run;
 
-data mycas.baseball;
+data mylib.baseball;
    set sashelp.baseball;
 run;
 
-proc qtrselect data=mycas.baseball;
+proc qtrselect data=mylib.baseball;
    class league division;
    model Salary = nAtBat nHits nHome nRuns nRBI nBB
                   yrMajor crAtBat crHits crHome crRuns crRbi
                   crBB league division nOuts nAssts nError;
 run;
 
-proc qtrselect data=mycas.baseball;
+proc qtrselect data=mylib.baseball;
    class league division;
    model Salary = nAtBat nHits nHome nRuns nRBI nBB
                   yrMajor crAtBat crHits crHome crRuns crRbi
@@ -39,7 +39,7 @@ proc qtrselect data=mycas.baseball;
    selection method=forward(select=sl sle=0.1);
 run;
 
-proc qtrselect data=mycas.baseball alpha=0.1;
+proc qtrselect data=mylib.baseball alpha=0.1;
    class league division;
    model Salary = nAtBat nHits nHome nRuns nRBI nBB
                   yrMajor crAtBat crHits crHome crRuns crRbi
@@ -48,19 +48,19 @@ proc qtrselect data=mycas.baseball alpha=0.1;
    selection method=backward(select=sl sls=0.1);
 run;
 
-proc qtrselect data=mycas.baseball alpha=0.1;
+proc qtrselect data=mylib.baseball alpha=0.1;
    class league division;
    model Salary = nAtBat nHits nHome nRuns nRBI nBB
                   yrMajor crAtBat crHits crHome crRuns crRbi
                   crBB league division nOuts nAssts nError
          / quantile=0.9 clb;
    selection method=backward(select=sl sls=0.1);
-   output out=mycas.BaseballOverpaid copyvar=(Name Salary) r=Overpaid
+   output out=mylib.BaseballOverpaid copyvar=(Name Salary) r=Overpaid
           p=PredictedSalary lclm uclm;
 run;
 
 data BaseballOverpaid;
-   set mycas.BaseballOverpaid;
+   set mylib.BaseballOverpaid;
 run;
 
 proc sort data=BaseballOverpaid;

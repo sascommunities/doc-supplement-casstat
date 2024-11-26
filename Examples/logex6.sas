@@ -25,7 +25,7 @@ estimating equations.
 
 title 'Example 6: Binary Regression with Repeated Measures';
 
-data sascas1.six;
+data mylib.six;
      input case city$ @@;
    do i=1 to 4;
       input age smoke wheeze @@;
@@ -50,7 +50,7 @@ data sascas1.six;
 16 portage   9 1 1  10 1 1  11 2 0  12 1 0
 ;
 
-proc logselect data=sascas1.six;
+proc logselect data=mylib.six;
    class case city;
    model wheeze(event='1') = city age smoke;
    repeated subject=case / type=exch covb corrw printmle;

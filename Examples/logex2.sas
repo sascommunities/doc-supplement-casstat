@@ -38,21 +38,21 @@ data Ingots;
 7 2.8 0 12  14 2.8 0 31  27 2.8 1 22  51 4.0 0  1
 7 4.0 0  9  14 4.0 0 19  27 4.0 1 16
 ;
-data mycas.Ingots;
+data mylib.Ingots;
    set Ingots;
 run;
 
-proc logselect data=mycas.Ingots association ctable(out=mycas.Roc nocounts tpf fpf);
+proc logselect data=mylib.Ingots association ctable(out=mylib.Roc nocounts tpf fpf);
    model r/n = Heat Soak Heat*Soak;
-   output out=mycas.Out xbeta predicted=Pred copyvars=(Heat Soak);
+   output out=mylib.Out xbeta predicted=Pred copyvars=(Heat Soak);
 run;
 
-proc print data=mycas.Out;
+proc print data=mylib.Out;
    where Heat=14 & Soak=1.7;
 run;
 
 ods graphics on;
-proc sgplot data=mycas.Roc aspect=1 noautolegend;
+proc sgplot data=mylib.Roc aspect=1 noautolegend;
    title 'ROC Curve';
    xaxis values=(0 to 1 by 0.25) grid offsetmin=.05 offsetmax=.05;
    yaxis values=(0 to 1 by 0.25) grid offsetmin=.05 offsetmax=.05;
@@ -61,17 +61,17 @@ proc sgplot data=mycas.Roc aspect=1 noautolegend;
    inset 'Area under the curve=0.7706' / position=bottomright;
 run;
 
-data mycas.Ingots2;
+data mylib.Ingots2;
    set Ingots;
    a = n - r;
 run;
 
-proc logselect data=mycas.Ingots2 association ctable(out=mycas.Roc nocounts tpf fpf);
+proc logselect data=mylib.Ingots2 association ctable(out=mylib.Roc nocounts tpf fpf);
    model r a = Heat Soak Heat*Soak;
-   output out=mycas.Out xbeta predicted=Pred copyvars=(Heat Soak);
+   output out=mylib.Out xbeta predicted=Pred copyvars=(Heat Soak);
 run;
 
-data mycas.Ingots_binary;
+data mylib.Ingots_binary;
    set Ingots;
    do i=1 to n;
      if i <= r then y=1; else y = 0;
@@ -79,7 +79,7 @@ data mycas.Ingots_binary;
    end;
 run;
 
-proc logselect data=mycas.Ingots_binary;
+proc logselect data=mylib.Ingots_binary;
    model y(event='1') = Heat Soak Heat*Soak;
 run;
 

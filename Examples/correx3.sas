@@ -21,7 +21,7 @@
 | Oxygen (oxygen intake, ml per kg body weight per minute)   |
 | Certain values were changed to missing for the analysis.   |
 *------------------------------------------------------------*;
-data mycas.Fitness;
+data mylib.Fitness;
    input Age Weight Oxygen RunTime @@;
    datalines;
 44 89.47 44.609 11.37    40 75.07 45.313 10.07
@@ -43,20 +43,20 @@ data mycas.Fitness;
 ;
 
 title 'Correlations for a Fitness and Exercise Study';
-proc correlation data=mycas.Fitness nomiss outp=mycas.CorrOutp;
+proc correlation data=mylib.Fitness nomiss outp=mylib.CorrOutp;
    var weight oxygen runtime;
 run;
 
 title 'Output Data Table from PROC CORRELATION';
-proc print data=mycas.CorrOutp noobs;
+proc print data=mylib.CorrOutp noobs;
 run;
 
 title 'Input Type CORR Data Set from PROC REG';
-proc reg data=mycas.CorrOutp(type=CORR);
+proc reg data=mylib.CorrOutp(type=CORR);
    model runtime= weight oxygen;
 run;
 
-proc reg data=mycas.Fitness;
+proc reg data=mylib.Fitness;
    model runtime= weight oxygen;
 run;
 

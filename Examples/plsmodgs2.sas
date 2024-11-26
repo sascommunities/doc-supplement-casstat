@@ -34,19 +34,19 @@ data artData;
     2.44277  3.61077       -0.82590
 ;
 
-data mycas.artData;
+data mylib.artData;
    set artData;
 run;
 
-proc plsmod data=mycas.artData nfac=1 method=rrr;
+proc plsmod data=mylib.artData nfac=1 method=rrr;
    model y = x1 x2;
 run;
 
-proc plsmod data=mycas.artData nfac=1 method=pcr;
+proc plsmod data=mylib.artData nfac=1 method=pcr;
    model y = x1 x2;
 run;
 
-proc plsmod data=mycas.artData nfac=1 method=pls;
+proc plsmod data=mylib.artData nfac=1 method=pls;
    model y = x1 x2;
 run;
 

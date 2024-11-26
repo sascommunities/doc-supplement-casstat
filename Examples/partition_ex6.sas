@@ -13,19 +13,19 @@
 /*    MISC:Example                                                            */
 /******************************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
    id = _N_;
    freqVar = 10;
 run;
 
-proc partition data=mycas.hmeq samppct=10 samppct2=20 seed=10;
+proc partition data=mylib.hmeq samppct=10 samppct2=20 seed=10;
    by bad;
    target job reason;
    freq freqVar;
-   output out=mycas.out6 copyvars=(job reason loan value delinq derog);
+   output out=mylib.out6 copyvars=(job reason loan value delinq derog);
 run;
 
-proc print data=mycas.out6(obs=20);
+proc print data=mylib.out6(obs=20);
 run;
 

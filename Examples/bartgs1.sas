@@ -14,7 +14,7 @@
 /****************************************************************/
 
 title 'Automobile MPG Study';
-data mycas.Autompg;
+data mylib.Autompg;
    input MPG Cylinders Displacement Horsepower Weight
          Acceleration Year Origin Name $35.;
    datalines;
@@ -418,7 +418,7 @@ data mycas.Autompg;
 31.0 4 119.0   82.00   2720   19.4   82  1  Chevy S-10
 ;
 
-proc bart data= mycas.autompg seed=246810;
+proc bart data= mylib.autompg seed=246810;
    class cylinders year origin;
    model mpg = cylinders displacement horsepower
                weight acceleration year origin;

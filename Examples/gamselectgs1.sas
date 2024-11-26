@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.getStarted;
+data mylib.getStarted;
   drop i j w;
 
   array x{90};
@@ -38,7 +38,7 @@ data mycas.getStarted;
 run;
 
 ods graphics on;
-proc gamselect data= mycas.getStarted plots=all;
+proc gamselect data= mylib.getStarted plots=all;
    model y = spline(x1 ) spline(x2 ) spline(x3 ) spline(x4 ) spline(x5 )
              spline(x6 ) spline(x7 ) spline(x8 ) spline(x9 ) spline(x10)
              ;
@@ -53,7 +53,7 @@ run;
 
 
 ods graphics on;
-proc gamselect data= mycas.getStarted plots=all;
+proc gamselect data= mylib.getStarted plots=all;
    model y = %SplinePrefixList(x,90);
    selection method=boosting;
 run;

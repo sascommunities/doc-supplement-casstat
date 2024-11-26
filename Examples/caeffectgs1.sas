@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.School;
+data mylib.School;
    input
    Income $ FatherEd $ MotherEd $ Math BaseMath  Catholic $;
    datalines;
@@ -5690,27 +5690,27 @@ data mycas.School;
    High College SomeSecondary 63.57 63.51 Yes
 ;
 
-proc logselect data=mycas.School;
+proc logselect data=mylib.School;
    class FatherEd MotherEd Income;
    model Catholic( event='Yes' ) = FatherEd MotherEd Income;
-   output out=mycas.schoolEst pred=pTrt copyvars=(_All_);
+   output out=mylib.schoolEst pred=pTrt copyvars=(_All_);
 run;
 
-data mycas.schoolEst;
-   set mycas.schoolEst;
+data mylib.schoolEst;
+   set mylib.schoolEst;
    pCnt = 1 - pTrt;
 run;
 
-proc bart data=mycas.schoolEst nMC=200 nTree=100 seed=2455;
+proc bart data=mylib.schoolEst nMC=200 nTree=100 seed=2455;
    class Income FatherEd MotherEd Catholic;
    model Math = BaseMath Income FatherEd MotherEd Catholic;
-   store out=mycas.bartOutMod;
+   store out=mylib.bartOutMod;
 run;
 
-proc caeffect data=mycas.schoolEst;
+proc caeffect data=mylib.schoolEst;
    treatvar Catholic;
    outcomevar Math;
-   outcomemodel restore=mycas.bartOutMod predname=P_Math;
+   outcomemodel restore=mylib.bartOutMod predname=P_Math;
    pom treatlev='Yes' treatprob=pTrt;
    pom treatlev='No'  treatprob=pCnt;
    difference evtLev='Yes';

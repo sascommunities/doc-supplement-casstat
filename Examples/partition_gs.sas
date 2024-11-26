@@ -15,13 +15,13 @@
 /*          PARTITION                                           */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
 run;
 
-proc partition data=mycas.hmeq samppct=10 samppct2=20 seed=1234 partind;
+proc partition data=mylib.hmeq samppct=10 samppct2=20 seed=1234 partind;
    by BAD;
-   output out=mycas.out1 copyvars=(BAD loan derog mortdue value yoj
+   output out=mylib.out1 copyvars=(BAD loan derog mortdue value yoj
           delinq clage ninq clno debtinc);
 run;
 

@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.Crime;
+data mylib.Crime;
    title 'Crime Rates per 100,000 Population by State';
    input State $1-15 Murder Rape Robbery Assault
          Burglary Larceny Auto_Theft;
@@ -70,6 +70,6 @@ Wisconsin       2.8 12.9  52.2  63.7  846.9 2614.2 220.7
 Wyoming          .  21.9  39.7 173.9  811.6 2772.2 282.0
 ;
 
-proc pca data=mycas.Crime;
+proc pca data=mylib.Crime;
 run;
 

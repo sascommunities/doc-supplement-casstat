@@ -15,7 +15,7 @@
 /*  Details Section: Class Variable Split Example              */
 /****************************************************************/
 
-data mycas.splitExample;
+data mylib.splitExample;
    length c2 $6;
    drop i;
    do i=1 to 1000;
@@ -30,7 +30,7 @@ data mycas.splitExample;
    end;
 run;
 
-proc regselect data=mycas.splitExample;
+proc regselect data=mylib.splitExample;
    class c1(split) c2(order=freq);
    model y = c1 c2 x1 x2;
    selection method=forward;

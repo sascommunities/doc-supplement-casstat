@@ -14,38 +14,38 @@
 /*                                                              */
 /****************************************************************/
 
-proc logselect data=mycas.SmokingWeight;
+proc logselect data=mylib.SmokingWeight;
    class Sex Race Education Exercise Activity;
    model Quit(Event='1') = Sex Race Education
          Exercise Activity Age YearsSmoke PerDay;
-   output out=mycas.swDREstData pred=pTrt copyvars=(_ALL_);
+   output out=mylib.swDREstData pred=pTrt copyvars=(_ALL_);
 run;
 
-data mycas.swDREstData;
-   set mycas.swDREstData;
+data mylib.swDREstData;
+   set mylib.swDREstData;
    pCnt = 1 - pTrt;
 run;
 
-proc bart data=mycas.swDREstData nTree=100 nMC=200 seed=2156;
+proc bart data=mylib.swDREstData nTree=100 nMC=200 seed=2156;
    class Sex Race Education Exercise Activity Quit;
    model Change = Sex Race Education Exercise Quit Activity
          Age YearsSmoke PerDay;
-   store out=mycas.bartOutMod;
+   store out=mylib.bartOutMod;
 run;
 
-proc caeffect data=mycas.swDREstData method=aipw;
+proc caeffect data=mylib.swDREstData method=aipw;
    treatvar Quit;
    outcomevar Change;
-   outcomemodel restore=mycas.bartOutMod predName=P_Change;
+   outcomemodel restore=mylib.bartOutMod predName=P_Change;
    pom treatLev=1 treatProb=pTrt;
    pom treatLev=0 treatProb=pCnt;
    difference evtLev=1;
 run;
 
-proc caeffect data=mycas.swDREstData method=tmle;
+proc caeffect data=mylib.swDREstData method=tmle;
    treatvar Quit;
    outcomevar Change;
-   outcomemodel restore=mycas.bartOutMod predName=P_Change;
+   outcomemodel restore=mylib.bartOutMod predName=P_Change;
    pom treatLev=1 treatProb=pTrt;
    pom treatLev=0 treatProb=pCnt;
    difference evtLev=1;

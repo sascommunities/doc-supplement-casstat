@@ -12,7 +12,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.Random;
+data mylib.Random;
    length processname $16 subgroupname $16;
    do i = 1 to 100;
       processname  = 'Process'  || left( put( i, z3. ) );
@@ -27,9 +27,9 @@ data mycas.Random;
    drop i j;
 run;
 
-proc spc data=mycas.Random;
+proc spc data=mylib.Random;
    xchart / exchart
             tests    = 1 to 4
-            outtable = mycas.RandomTests;
+            outtable = mylib.RandomTests;
 run;
 

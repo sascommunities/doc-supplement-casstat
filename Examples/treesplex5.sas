@@ -13,7 +13,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.MBE_Data;
+data mylib.MBE_Data;
    label gTemp  = 'Growth Temperature of Substrate';
    label aTemp  = 'Anneal Temperature';
    label Rot    = 'Rotation Speed';
@@ -44,7 +44,7 @@ data mycas.MBE_Data;
    384.578    635.858    1.12215      Sn      Unusable
    ;
 
-proc treesplit data=mycas.MBE_Data maxdepth=6;
+proc treesplit data=mylib.MBE_Data maxdepth=6;
    class Usable Dopant;
    model Usable = gTemp aTemp Rot Dopant;
    prune none;

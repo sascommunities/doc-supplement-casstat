@@ -21,7 +21,7 @@
 | HtPct    (max height, as percentage of Length3)                 |
 | WidthPct (max width,  as percentage of Length3)                 |
 *-----------------------------------------------------------------*;
-data mycas.Fish1 (drop=HtPct WidthPct);
+data mylib.Fish1 (drop=HtPct WidthPct);
    title 'Fish Measurement Data';
    input Weight Length3 HtPct WidthPct @@;
    Weight3= Weight**(1/3);
@@ -49,7 +49,7 @@ data mycas.Fish1 (drop=HtPct WidthPct);
 ;
 
 title 'Fish Measurement Data';
-proc correlation data=mycas.fish1 nomiss alpha;
+proc correlation data=mylib.fish1 nomiss alpha;
    var Weight3 Length3 Height Width;
 run;
 

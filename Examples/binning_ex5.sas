@@ -14,17 +14,17 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
     set sampsio.hmeq;
 run;
 
-proc binning data=mycas.hmeq method=tree;
+proc binning data=mylib.hmeq method=tree;
  target bad/level=int;
  input mortdue/level = int;
  input job/ level = nom;
- output outlevelbinmap=mycas.outlevel;
+ output outlevelbinmap=mylib.outlevel;
 run;
 
-proc print data=mycas.outlevel;
+proc print data=mylib.outlevel;
 run;
 

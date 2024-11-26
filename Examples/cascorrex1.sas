@@ -22,7 +22,7 @@
 | PetalWidth  (petal width)                                  |
 | Certain values were changed to missing for the analysis.   |
 *------------------------------------------------------------*;
-data mycas.Setosa;
+data mylib.Setosa;
   input SepalLength SepalWidth PetalLength PetalWidth @@;
   label sepallength='Sepal Length in mm.'
         sepalwidth='Sepal Width in mm.'
@@ -49,7 +49,7 @@ data mycas.Setosa;
 ;
 
 title 'Fisher (1936) Iris Setosa Data';
-proc correlation data=mycas.Setosa sscp cov;
+proc correlation data=mylib.Setosa sscp cov;
    var  sepallength sepalwidth;
    with petallength petalwidth;
 run;

@@ -20,20 +20,20 @@ proc contents varnum data=sashelp.baseball
    ods select position;
 run;
 
-data mycas.baseball;
+data mylib.baseball;
    set sashelp.baseball;
    index = _N_;
 run;
 
-proc modelmatrix data=mycas.baseball;
+proc modelmatrix data=mylib.baseball;
   class League Division;
   model logSalary = League Division nHits*yrMajor;
-  output out = mycas.designMat copyvar=index;
+  output out = mylib.designMat copyvar=index;
 run;
 
 
 data designMat;
- set mycas.designMat;
+ set mylib.designMat;
 run;
 
 proc sort data=designMat;

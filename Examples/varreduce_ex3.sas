@@ -14,7 +14,7 @@
 /*    MISC:                                                         */
 /********************************************************************/
 
-data mycas.data2;
+data mylib.data2;
    array x{2};
    do i=1 to 2000;
       a=int(ranuni(1)*2);
@@ -27,11 +27,11 @@ run;
 
 title  "Output the Correlation Matrix in LIL Format";
 
-proc varreduce data=mycas.data2 matrix=corr outcp=mycas.corr_lil/list eps=0.01;
+proc varreduce data=mylib.data2 matrix=corr outcp=mylib.corr_lil/list eps=0.01;
    class a;
    reduce unsupervised a x1-x2 /maxsteps=4;
 run;
 
-proc print data=mycas.corr_lil;
+proc print data=mylib.corr_lil;
 run;
 

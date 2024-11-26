@@ -13,15 +13,15 @@
 /*    MISC:Example -- Stratified Sampling                       */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
 run;
 
-proc partition data=mycas.hmeq kfold=10 seed=10 nthreads=3;
+proc partition data=mylib.hmeq kfold=10 seed=10 nthreads=3;
    by BAD;
-   output out=mycas.out5 copyvars=(job reason loan value delinq derog);
+   output out=mylib.out5 copyvars=(job reason loan value delinq derog);
 run;
 
-proc print data=mycas.out5(obs=20);
+proc print data=mylib.out5(obs=20);
 run;
 

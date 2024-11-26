@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.ex1data;
+data mylib.ex1data;
    keep t x:;
    array S[200,3];     /* S: source signals */
    array A[3,3];       /* A: mixing matrix */
@@ -48,9 +48,9 @@ run;
 
 /* Extract independent components with dimension reduction */
 
-proc ica data=mycas.ex1data eigthresh=0.004 noscale seed=345;
+proc ica data=mylib.ex1data eigthresh=0.004 noscale seed=345;
    var x1-x4;
-   output out=mycas.scores1 component=c copyvar=t;
+   output out=mylib.scores1 component=c copyvar=t;
 run;
 
 proc template;
@@ -86,13 +86,13 @@ proc template;
    end;
 run;
 
-proc sgrender data=mycas.scores1 template=ScoresPanel;
+proc sgrender data=mylib.scores1 template=ScoresPanel;
 run;
 
 /* Extract independent components with full dimensions */
 
-proc ica data=mycas.ex1data noscale seed=345;
+proc ica data=mylib.ex1data noscale seed=345;
    var x1-x4;
-   output out=mycas.scores2 component=c copyvar=t;
+   output out=mylib.scores2 component=c copyvar=t;
 run;
 

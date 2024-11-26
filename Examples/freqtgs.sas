@@ -3,7 +3,7 @@
 /*                                                              */
 /*    NAME: FREQTGS                                             */
 /*   TITLE: Getting Started Example for PROC FREQTAB            */
-/* PRODUCT: AASTATISTICS                                        */
+/* PRODUCT: Visual Statistics                                   */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS: categorical data analysis, frequency tables,        */
 /*    KEYS: crosstabulation tables, multiway tables,            */
@@ -106,25 +106,25 @@ proc sort data=example nothreads;
    by rannum;
 run;
 
-data mycas.School_Survey;
+data mylib.School_Survey;
    set example;
    drop rannum seed;
 run;
 
-proc freqtab data=mycas.School_Survey;
+proc freqtab data=mylib.School_Survey;
    tables SchoolType * Response /
       crosslist chisq measures(cl);
 run;
 
 ods graphics on;
-proc freqtab data=mycas.School_Survey;
+proc freqtab data=mylib.School_Survey;
    tables Response * SchoolType /
       plots=(freqplot(twoway=cluster orient=h scale=grouppercent)
              mosaicplot(colorstat=stdres));
 run;
 ods graphics off;
 
-proc freqtab data=mycas.School_Survey;
+proc freqtab data=mylib.School_Survey;
    tables State * SchoolType * Response / cmh;
 run;
 

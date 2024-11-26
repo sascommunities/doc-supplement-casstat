@@ -14,16 +14,16 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.iris;
+data mylib.iris;
    set sashelp.iris;
 run;
 
-proc cardinality data=mycas.iris outcard=mycas.card
-                 outdetails=mycas.details maxlevels=5;
+proc cardinality data=mylib.iris outcard=mylib.card
+                 outdetails=mylib.details maxlevels=5;
 run;
 
 data sp;
-   set mycas.details( where=(_varname_='Species'));
+   set mylib.details( where=(_varname_='Species'));
    label _cfmt_='Formatted value of the variable Species';
    if _index_ = . then do;
       _cfmt_=cats(">",left(_cfmt_));

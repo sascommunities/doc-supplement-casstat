@@ -20,7 +20,7 @@
 %let nOutOfPocketFam=6;
 %let nFamSize=5;
 
-data mycas.insure;
+data mylib.insure;
    call streaminit(1234);
    do Individual = 1 to 20000;
       rInd = 5 *rand("normal");
@@ -40,7 +40,7 @@ data mycas.insure;
 run;
 
 ods select ModelInfo Dimensions ModelAnova;
-proc sandwich data=mycas.insure sparse;
+proc sandwich data=mylib.insure sparse;
    class individual year familysize DeductibleInd DeductibleFam
          OutOfPocketInd OutOfPocketFam;
    clusters individual;

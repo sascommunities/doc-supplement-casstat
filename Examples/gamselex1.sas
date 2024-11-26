@@ -15,7 +15,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.JunkMail;
+data mylib.JunkMail;
    set Sashelp.JunkMail;
 run;
 
@@ -27,7 +27,7 @@ run;
    %end;
 %mend;
 
-proc gamselect data=mycas.JunkMail;
+proc gamselect data=mylib.JunkMail;
    model Class(event='1')= %SplineVList(Make Address All _3d Our Over Remove
          Internet Order Mail Receive Will People Report Addresses Free Business
          Email You Credit Your Font _000 Money HP HPL George _650 Lab Labs
@@ -39,7 +39,7 @@ proc gamselect data=mycas.JunkMail;
    selection method=boosting(maxIter=2000);
 run;
 
-proc logselect data=mycas.JunkMail;
+proc logselect data=mylib.JunkMail;
    model Class(event='1')=Make Address All _3d Our Over Remove Internet Order
          Mail Receive Will People Report Addresses Free Business Email You
          Credit Your Font _000 Money HP HPL George _650 Lab Labs Telnet _857

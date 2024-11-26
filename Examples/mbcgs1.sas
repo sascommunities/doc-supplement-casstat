@@ -16,7 +16,7 @@
 /****************************************************************/
 title 'Getting Started: Bivariate Data';
 
-data mycas.getStarted;
+data mylib.getStarted;
   input Duration Wait @@;
   datalines;
 3.600 79  1.800 54  3.333 74  2.283 62  4.533 85  2.883 55  4.700 88  3.600 85
@@ -55,20 +55,20 @@ data mycas.getStarted;
 1.983 43  2.250 60  4.750 75  4.117 81  2.150 46  4.417 90  1.817 46  4.467 74
 ;
 
-proc sgplot data=mycas.getStarted;
+proc sgplot data=mylib.getStarted;
   scatter x=duration y=wait / markerattrs=(symbol=circlefilled size=4);
 run; quit;
 
-proc mbc data=mycas.getStarted nclusters=(1 to 5)
+proc mbc data=mylib.getStarted nclusters=(1 to 5)
                                noise=(YES NO)
                                covstruct=(EEV EII VVV)
                                seed=1418410433;
   var duration wait;
-  output out=mycas.scores copyvars=(duration wait);
+  output out=mylib.scores copyvars=(duration wait);
 run;
 
 data scores;
-  set mycas.scores;
+  set mylib.scores;
   maxwt = max(of next:);
 run;
 

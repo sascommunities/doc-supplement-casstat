@@ -13,7 +13,7 @@
 /****************************************************************/
 
 
- data mycas.sample;
+ data mylib.sample;
  call streaminit(1);
      do byVar=1 to 2;
        do i=1 to 10;
@@ -31,24 +31,24 @@
 
 
  data sample;
-   set mycas.sample;
+   set mylib.sample;
  run;
 
  proc print data=sample;
  run;
 
- proc modelmatrix data=mycas.sample nthreads=1;
+ proc modelmatrix data=mylib.sample nthreads=1;
    by byVar;
    class c;
    freq frq;
    weight wgt;
    effect spl= spline(x);
    model y = x c spl x*c;
-   output out=mycas.designMat prefix=param copyVars=(c frq index);
+   output out=mylib.designMat prefix=param copyVars=(c frq index);
  run;
 
  data work.designMat;
-   set mycas.designMat;
+   set mylib.designMat;
  run;
 
  proc print data=designMat;

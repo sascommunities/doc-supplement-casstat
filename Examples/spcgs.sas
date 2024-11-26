@@ -457,12 +457,12 @@ data Wire;
    set Wire(rename=(Breakstrength=process Sample=subgroup));
 run;
 
-data mycas.AllProcesses;
+data mylib.AllProcesses;
    set Beer Detergent Disks Partgaps Times Turbine Wafers Wire;
    format subgroup;
 run;
 
-proc spc data=mycas.AllProcesses;
+proc spc data=mylib.AllProcesses;
    xrchart;
 run;
 

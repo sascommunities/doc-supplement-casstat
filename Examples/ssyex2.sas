@@ -19,7 +19,7 @@
 / compute the expected coverage of three-sigma limits.
 /---------------------------------------------------------------------*/
 
-data mycas.Grid;
+data mylib.Grid;
    do s2 = 0 to 10 by 0.05;
       do Kurtosis = 1 to 11 by 0.05;
          Skewness = sqrt(s2);
@@ -29,7 +29,7 @@ data mycas.Grid;
 run;
 
 ods select none;
-proc simsystem data=mycas.Grid system=johnson cumprob=-3 3 plot=none;
+proc simsystem data=mylib.Grid system=johnson cumprob=-3 3 plot=none;
    ods output Parameters=SKProbJ;
 run;
 ods select all;
@@ -55,7 +55,7 @@ run;
 / Generate densities for distributions with low coverage.
 /---------------------------------------------------------------------*/
 
-data mycas.LowCoverage;
+data mylib.LowCoverage;
    do s2 = 7 to 10 by 0.5;
       do Kurtosis = 8 to 11 by 0.5;
          Skewness = sqrt(s2);
@@ -65,7 +65,7 @@ data mycas.LowCoverage;
       end;
 run;
 
-proc simsystem data=mycas.LowCoverage system=johnson
+proc simsystem data=mylib.LowCoverage system=johnson
                plots=mrmap(skewscale=square);
 run;
 

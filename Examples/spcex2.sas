@@ -12,7 +12,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.AllSpecs;
+data mylib.AllSpecs;
    length processname $16;
    input processname LSL Target USL;
    datalines;
@@ -26,7 +26,7 @@ Time              7.85    8.0     8.15
 Weight           23.0    24.0    25.0
 ;
 
-proc spc data=mycas.AllProcesses;
-   xrchart / exchart specs=mycas.AllSpecs;
+proc spc data=mylib.AllProcesses;
+   xrchart / exchart specs=mylib.AllSpecs;
 run;
 

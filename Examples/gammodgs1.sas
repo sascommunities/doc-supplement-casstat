@@ -12,7 +12,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.Vote1980;
+data mylib.Vote1980;
    set sashelp.Vote1980;
 run;
 
@@ -30,20 +30,20 @@ proc template;
    end;
 run;
 
-proc sgrender data=mycas.Vote1980 template=surface;
+proc sgrender data=mylib.Vote1980 template=surface;
    dynamic _title = 'US County Vote Proportion in the 1980 Election'
           _z      = 'LogVoteRate';
 run;
 
 ods graphics on;
 
-proc gammod data=mycas.Vote1980 plots seed=12345;
+proc gammod data=mylib.Vote1980 plots seed=12345;
    model LogVoteRate = spline(Pop   ) spline(Edu) spline(Houses)
                        spline(Income) spline(Longitude Latitude);
-   output out=mycas.VotePred copyvars=(Longitude Latitude);
+   output out=mylib.VotePred copyvars=(Longitude Latitude);
 run;
 
-proc sgrender data=mycas.VotePred template=surface;
+proc sgrender data=mylib.VotePred template=surface;
    dynamic _title='Predicted US County Vote Proportion in the 1980 Election'
            _z    ='Pred';
 run;

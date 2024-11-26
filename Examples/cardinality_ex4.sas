@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.cars;
+data mylib.cars;
    set sashelp.cars;
 run;
 
@@ -25,22 +25,22 @@ proc format casfmtlib='myfmtlib';
        6   -high='usable';
 run;
 
-data mycas.cars;
+data mylib.cars;
    format engineSize engsize.;
-   set mycas.cars;
+   set mylib.cars;
 run;
 
-proc cardinality data=mycas.cars outcard=mycas.card
-                 outdetails=mycas.details maxlevels=5;
+proc cardinality data=mylib.cars outcard=mylib.card
+                 outdetails=mylib.details maxlevels=5;
    var engineSize;
 run;
 
 title 'Cars data with a user-defined format';
-proc print data=mycas.card;
+proc print data=mylib.card;
    var _varname_ _order_ _more_ _cardinality_;
 run;
 
-proc print data=mycas.details;
+proc print data=mylib.details;
    var _varname_ _index_ _freq_ _cfmt_;
 run;
 

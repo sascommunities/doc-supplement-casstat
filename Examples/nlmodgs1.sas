@@ -3,14 +3,14 @@
 /*                                                              */
 /*    NAME: NLMODGS1                                            */
 /*   TITLE: Getting Started Example for PROC NLMOD              */
-/* PRODUCT: VIYA Statistics                                     */
+/* PRODUCT: SAS Visual Statistics                               */
 /*    KEYS: Nonlinear regression, Enzyme reaction model         */
 /*   PROCS: NLMOD                                               */
 /*    MISC: Estimating the Parameters in the Nonlinear Model    */
 /*                                                              */
 /****************************************************************/
 
-data mycas.Enzyme;
+data mylib.Enzyme;
    input conc rate @@;
    datalines;
 0.26 124.7   0.30 126.9
@@ -22,7 +22,7 @@ data mycas.Enzyme;
 2.44 154.5   2.48 154.7
 ;
 
-proc nlmod data=mycas.Enzyme;
+proc nlmod data=mylib.Enzyme;
    parms theta1=0 theta2=0;
    model rate ~ residual(theta1*conc / (theta2 + conc));
 run;

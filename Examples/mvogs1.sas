@@ -4,7 +4,7 @@
 /*    NAME: mvogs1                                              */
 /*   TITLE: Getting Started Example for PROC MVOUTLIER          */
 /*    DESC: Assessing Outliers and Leverage in Car Measurements */
-/* PRODUCT: AACAS                                               */
+/* PRODUCT: SAS Visual Statistics                               */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS: Robust multivariate outlier detection               */
 /*   PROCS: MVOUTLIER                                           */
@@ -14,7 +14,7 @@
 /****************************************************************/
 title 'PROC MVOUTLIER: Getting Started Example';
 
-data mycas.cars;
+data mylib.cars;
    format MakeModel $char20.;
    input MakeModel Length Wheelbase Width Height FrontHd RearHd /
          FrtLegRoom RearSeating FrtShld RearShld Luggage;
@@ -244,12 +244,12 @@ VolkswagenVanagon      0.1111111    -1   2.5  20.5   3     7
  ;
 
 ods graphics on;
-proc mvoutlier data=mycas.cars initonly plots=scree;
+proc mvoutlier data=mylib.cars initonly plots=scree;
    var :;
    id MakeModel;
 run;
 
-proc mvoutlier data=mycas.cars propvariance=0.9 plots=diagnostic;
+proc mvoutlier data=mylib.cars propvariance=0.9 plots=diagnostic;
    var :;
    id MakeModel;
    display NVars EigenvaluesFinal Cutoffs DiagSummary Diagnostics;

@@ -16,7 +16,7 @@ proc contents varnum data=sashelp.BMIMen;
    ods select position;
 run;
 
-   data mycas.BMIMen;
+   data mylib.BMIMen;
       set sashelp.BMIMen;
       SqrtAge = sqrt(Age);
       InveAge = 1/Age;
@@ -26,10 +26,10 @@ run;
 %let quantile=0.03 0.05 0.1 0.25 0.5 0.75 0.85 0.90 0.95 0.97;
 %let nq=10;
 
-proc qtrselect data=mycas.BMIMen;
+proc qtrselect data=mylib.BMIMen;
    model logBMI = InveAge SqrtAge Age SqrtAge*Age Age*Age Age*Age*Age
          / quantile=&quantile;
-   output out=mycas.BMIOut copyvars=(BMI Age) pred=P_LogBMI;
+   output out=mylib.BMIOut copyvars=(BMI Age) pred=P_LogBMI;
 run;
 
 /****************************************************************/
@@ -40,7 +40,7 @@ run;
 
 %macro plotBMI;
    data BMIPred;
-      set mycas.BMIOut;
+      set mylib.BMIOut;
       %do j=1 %to &nq;
          predBMI&j = exp(P_LogBMI&j);
       %end;

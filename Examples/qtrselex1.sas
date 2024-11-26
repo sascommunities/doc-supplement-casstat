@@ -31,14 +31,14 @@ data analysisData;
    end;
 run;
 
-data mycas.analysisData;
+data mylib.analysisData;
    set analysisData;
 run;
 
-proc qtrselect data=mycas.analysisData;
+proc qtrselect data=mylib.analysisData;
    model y= x1-x&p / quantile=0.1 0.5 0.9 clb;
    selection method=forward;
-   output out=mycas.out p=pred;
+   output out=mylib.out p=pred;
 run;
 
 

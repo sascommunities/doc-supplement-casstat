@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.SchoolSample;
+data mylib.SchoolSample;
    do SchoolID = 1 to 1000;
       do nID = 1 to 50;
          Neighborhood = (SchoolID-1)*15 + nId;
@@ -30,7 +30,7 @@ data mycas.SchoolSample;
       end;
 run;
 
-proc lmixed data=mycas.SchoolSample;
+proc lmixed data=mylib.SchoolSample;
    class Neighborhood SchoolID;
    model Math = Time Time*Time / solution;
    random   int Time Time*Time / sub=Neighborhood(SchoolID) type=un;

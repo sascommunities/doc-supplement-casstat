@@ -2,9 +2,9 @@
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
 /*    NAME: mvoex2                                              */
-/*   TITLE: Documentation Example 2 for PROC MVOUTLIER:         */
+/*   TITLE: Documentation Example for PROC MVOUTLIER:           */
 /*             Ensuring Reproducible Observation Order          */
-/* PRODUCT: AACAS                                               */
+/* PRODUCT: SAS Visual Statistics                               */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS: Robust multivariate outlier detection               */
 /*   PROCS: MVOUTLIER                                           */
@@ -14,7 +14,7 @@
 /****************************************************************/
 title 'Ensuring Reproducible Observation Order';
 
-data mycas.wbc;
+data mylib.wbc;
    input Specimen mean_radius mean_texture mean_perimeter mean_area mean_smoothness
      mean_compactness mean_concavity mean_concave_points mean_symmetry
      mean_fractal_dimension /
@@ -1161,19 +1161,19 @@ data mycas.wbc;
 ;
 
 ods graphics on;
-proc mvoutlier data=mycas.wbc contamination=0.06 propvariance=0.95
+proc mvoutlier data=mylib.wbc contamination=0.06 propvariance=0.95
                plots=diagnostic(maxobs=100) diagnosticoptions(showobsid);
    var mean_: stderr_: max_:;
    id Specimen;
-   output out=mycas.wbcOut obsid orthdist scoredist outlier leverage;
+   output out=mylib.wbcOut obsid orthdist scoredist outlier leverage;
 run;
 proc cas;
    fetch / table={name="wbcOut"} to=25;
 run;
 quit;
 
-data mycas.wbc;
-   set mycas.wbc;
+data mylib.wbc;
+   set mylib.wbc;
    Part = 1;
 run;
 
@@ -1184,12 +1184,12 @@ proc cas;
 run;
 quit;
 
-proc mvoutlier data=mycas.wbcSorted contamination=0.06 propvariance=0.95
+proc mvoutlier data=mylib.wbcSorted contamination=0.06 propvariance=0.95
                plots=diagnostic(maxObs=100) diagnosticoptions(showobsid)
                applyroworder;
    var mean_: stderr_: max_:;
    id Specimen;
-   output out=mycas.wbcOut obsid orthdist scoredist outlier leverage;
+   output out=mylib.wbcOut obsid orthdist scoredist outlier leverage;
 run;
 proc cas;
    fetch / table={name="wbcOut"} to=25;

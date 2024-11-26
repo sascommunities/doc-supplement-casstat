@@ -13,7 +13,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.Crime;
+data mylib.Crime;
    title 'Crime Rates per 100,000 Population by State';
    input State $1-15 Murder Rape Robbery Assault
          Burglary Larceny Auto_Theft;
@@ -74,10 +74,10 @@ Wyoming          .  21.9  39.7 173.9  811.6 2772.2 282.0
 
 ods graphics on;
 
-proc pca data=mycas.Crime method=nipals plots;
+proc pca data=mylib.Crime method=nipals plots;
 run;
 
-proc pca data=mycas.Crime method=nipals
+proc pca data=mylib.Crime method=nipals
          plots=(pattern(ncomp=3) patternprofile);
 run;
 

@@ -13,17 +13,17 @@
 /****************************************************************/
 
 /* Convert variable names to mixed case */
-data mycas.hmeq;
+data mylib.hmeq;
    length Bad Loan MortDue Value 8 Reason Job $7
           YoJ Derog Delinq CLAge nInq CLNo DebtInc 8;
    set sampsio.hmeq;
 run;
 
-proc print data=mycas.hmeq(obs=10); run;
+proc print data=mylib.hmeq(obs=10); run;
 
 ods graphics on;
 
-proc treesplit data=mycas.hmeq maxdepth=5;
+proc treesplit data=mylib.hmeq maxdepth=5;
    class Bad Delinq Derog Job nInq Reason;
    model Bad = Delinq Derog Job nInq Reason CLAge CLNo
                DebtInc Loan MortDue Value YoJ;

@@ -35,11 +35,11 @@ uninterrupted sequences of capital letters in emails.
 
 title 'Example 3: Partitioning Data';
 
-data mycas.JunkMail;
+data mylib.JunkMail;
    set Sashelp.JunkMail;
 run;
 
-proc logselect data=mycas.JunkMail;
+proc logselect data=mylib.JunkMail;
    model Class(event='1')=Make Address All _3d Our Over Remove Internet Order
          Mail Receive Will People Report Addresses Free Business Email You
          Credit Your Font _000 Money HP HPL George _650 Lab Labs Telnet _857

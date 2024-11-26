@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.getStarted;
+data mylib.getStarted;
    input C$ y x1-x10;
    datalines;
 D  0  10.2  6  1.6  38  15  2.4  20  0.8  8.5  3.9
@@ -119,12 +119,12 @@ F  0   5.4  4  1.5   2   1  1.8  70  0.4  5.5  3.6
 J  1  12.1  4  1.8  20  59  1.3  60  0.4    3  3.8
 ;
 
-proc varreduce data=mycas.getStarted technique=VarianceAnalysis;
+proc varreduce data=mylib.getStarted technique=VarianceAnalysis;
    class C;
    reduce unsupervised C x1-x10 / maxeffects=5 varexp=0.99;
 run;
 
-proc varreduce data=mycas.getStarted technique=DiscriminantAnalysis;
+proc varreduce data=mylib.getStarted technique=DiscriminantAnalysis;
    class C y;
    reduce supervised y = C x1-x10 / maxeffects=5;
 run;

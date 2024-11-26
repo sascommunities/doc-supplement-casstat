@@ -15,21 +15,21 @@
 /*                                                             */
 /***************************************************************/
 
-data mycas.iris;
+data mylib.iris;
    set sashelp.iris;
 run;
 
 
-proc cardinality data=mycas.iris outcard=mycas.card
-                 outdetails=mycas.details maxlevels=10;
+proc cardinality data=mylib.iris outcard=mylib.card
+                 outdetails=mylib.details maxlevels=10;
 run;
 
-proc print data=mycas.card;
+proc print data=mylib.card;
    var _varname_ _type_ _cardinality_ _more_;
 run;
 
 data details;
-   set mycas.details;
+   set mylib.details;
    where _varname_ in ('Species', 'SepalLength');
 run;
 

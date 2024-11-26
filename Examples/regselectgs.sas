@@ -19,32 +19,31 @@ proc contents varnum data=sashelp.baseball;
    ods select position;
 run;
 
-data mycas.baseball;
+data mylib.baseball;
    set sashelp.baseball;
 run;
 
 ods graphics on;
 
-proc regselect data=mycas.baseball;
-  class league division;
-  model logSalary = nAtBat nHits nHome nRuns nRBI nBB
-                    yrMajor crAtBat crHits crHome crRuns crRbi
-                    crBB league division nOuts nAssts nError;
-  selection method=stepwise plots=all;
+proc regselect data=mylib.baseball;
+   class league division;
+   model logSalary = nAtBat nHits nHome nRuns nRBI nBB
+                     yrMajor crAtBat crHits crHome crRuns crRbi
+                     crBB league division nOuts nAssts nError;
+   selection method=stepwise plots=all;
 run;
 
-proc regselect data=mycas.baseball;
+proc regselect data=mylib.baseball;
   class league division;
   model logSalary = nAtBat nHits nHome nRuns nRBI nBB
                     yrMajor crAtBat crHits crHome crRuns crRbi
                     crBB league division nOuts nAssts nError / vif clb;
   selection method=stepwise;
-  output out=mycas.baseballOut
+  output out=mylib.baseballOut
          p=predictedLogSalary r h cookd rstudent copyvars=(name);
 run;
 
-proc print data=mycas.baseballOut(obs=5);
+proc print data=mylib.baseballOut(obs=5);
 run;
 
-ods graphics off;
 

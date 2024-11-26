@@ -21,7 +21,7 @@
 | Oxygen (oxygen intake, ml per kg body weight per minute)   |
 | Certain values were changed to missing for the analysis.   |
 *------------------------------------------------------------*;
-data mycas.Fitness;
+data mylib.Fitness;
    input Age Weight Oxygen RunTime @@;
    datalines;
 44 89.47 44.609 11.37    40 75.07 45.313 10.07
@@ -42,6 +42,6 @@ data mycas.Fitness;
 52 82.78 47.467 10.50
 ;
 
-proc correlation data=mycas.Fitness;
+proc correlation data=mylib.Fitness;
 run;
 

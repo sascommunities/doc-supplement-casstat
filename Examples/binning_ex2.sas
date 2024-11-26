@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.ex2;
+data mylib.ex2;
    length id 8;
    call streaminit(12345);
    do id=1 to 10000;
@@ -25,8 +25,8 @@ data mycas.ex2;
    end;
 run;
 
-proc binning data=mycas.ex2 numbin=10 method=winsor(rate=0.05);
+proc binning data=mylib.ex2 numbin=10 method=winsor(rate=0.05);
    input x1-x3;
-   output out=mycas.out2;
+   output out=mylib.out2;
 run;
 

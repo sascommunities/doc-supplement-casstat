@@ -15,7 +15,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.inpData;
+data mylib.inpData;
    title 'Using PROC KCLUS to Analyze Data';
    drop n;
    id=1;
@@ -49,7 +49,7 @@ data mycas.inpData;
    end;
 run;
 
-proc kclus data=mycas.inpData maxclusters=3;
+proc kclus data=mylib.inpData maxclusters=3;
    input x y;
    freq freq;
 run;

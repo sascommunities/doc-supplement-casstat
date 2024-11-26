@@ -11,20 +11,20 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.baseball;
+data mylib.baseball;
    set sashelp.baseball;
 run;
 
 ods graphics on;
 
-proc treesplit data=mycas.baseball maxdepth=3;
+proc treesplit data=mylib.baseball maxdepth=3;
    class league division;
    model logSalary = nAtBat nHits nHome nRuns nRBI nBB
                      yrMajor crAtBat crHits crHome crRuns crRbi
                      crBB league division nOuts nAssts nError;
-   output out=mycas.treesplout;
+   output out=mylib.treesplout;
    prune none;
 run;
 
-proc print data=mycas.treesplout(obs=10); run;
+proc print data=mylib.treesplout(obs=10); run;
 

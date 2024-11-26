@@ -14,19 +14,19 @@
 /*                                                             */
 /***************************************************************/
 
-data mycas.baseball;
+data mylib.baseball;
   Set sashelp.baseball;
   Keep CrAtBat CrHits CrRuns CrRbi CrBB Team League Division Position Div;
 Run;
 
 
-proc kclus data=mycas.baseball maxiter=10 maxc=10 distancenom=relativefreq
-   outstat(outiter)=mycas.kclusOutstat4 printalldistances
+proc kclus data=mylib.baseball maxiter=10 maxc=10 distancenom=relativefreq
+   outstat(outiter)=mylib.kclusOutstat4 printalldistances
    noc=abc(B=10 minclusters=2 align=none criterion=all)
    kprototypeparams=usergamma(value=10);
    input CrAtBat CrHits CrRuns CrRbi CrBB / level=interval;
    input Team League Division Position Div / level=nominal;
-   score out=mycas.kclusOut4 copyvars=
+   score out=mylib.kclusOut4 copyvars=
    (CrAtBat CrHits CrRuns CrRbi CrBB Team League Division Position Div);
    ods output FreqNom=FreqNom4;
 run;

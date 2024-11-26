@@ -2,9 +2,9 @@
 /*          S A S   S A M P L E   L I B R A R Y                 */
 /*                                                              */
 /*    NAME: mvoex1                                              */
-/*   TITLE: Documentation Example 1 for PROC MVOUTLIER:         */
+/*   TITLE: Documentation Example for PROC MVOUTLIER:           */
 /*             Breast Cancer Diagnosis                          */
-/* PRODUCT: AACAS                                               */
+/* PRODUCT: SAS Visual Statistics                               */
 /*  SYSTEM: ALL                                                 */
 /*    KEYS: Robust multivariate outlier detection               */
 /*   PROCS: MVOUTLIER                                           */
@@ -14,7 +14,7 @@
 /****************************************************************/
 title 'Breast Dancer Diagnosis';
 
-data mycas.wbc;
+data mylib.wbc;
    input Specimen mean_radius mean_texture mean_perimeter mean_area mean_smoothness
      mean_compactness mean_concavity mean_concave_points mean_symmetry
      mean_fractal_dimension /
@@ -1161,7 +1161,7 @@ data mycas.wbc;
 ;
 
 ods graphics on;
-proc mvoutlier data=mycas.wbc contamination=0.06 propvariance=0.95
+proc mvoutlier data=mylib.wbc contamination=0.06 propvariance=0.95
                plots=diagnostic;
    var mean_: stderr_: max_:;
    id Specimen;

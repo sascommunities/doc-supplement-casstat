@@ -13,15 +13,15 @@
 /*    MISC: Example -- Simple Random Sampling                   */
 /****************************************************************/
 
-data mycas.hmeq;
+data mylib.hmeq;
    set sampsio.hmeq;
 run;
 
-proc partition data=mycas.hmeq samppct=10 seed=10 nthreads=1;
-   output out=mycas.out2 copyvars=(job reason loan value delinq derog);
+proc partition data=mylib.hmeq samppct=10 seed=10 nthreads=1;
+   output out=mylib.out2 copyvars=(job reason loan value delinq derog);
    display 'SRSFreq';
 run;
 
-proc print data=mycas.out2(obs=20);
+proc print data=mylib.out2(obs=20);
 run;
 

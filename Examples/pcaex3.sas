@@ -13,22 +13,22 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.testdata / sessref=mysess single=no;
+data mylib.testdata;
    title;
    keep x:;
    drop rank number_of_obs number_of_var sigma ii idum;
    drop rv1 rv2 rsq fac row col;
    drop nobs_per_thread nextras start_obs obs j k;
-   array B[50,5000];          /* dimensions: rank, number_of_var */
+   array B[50,2000];          /* dimensions: rank, number_of_var */
    array A[50];               /* dimension: rank */
-   array x[5000] x1-x5000;    /* dimension: number_of_var */
+   array x[2000] x1-x2000;    /* dimension: number_of_var */
 
    target_nthreads = min(_nthreads_,96);
    if (_threadid_ = 1) then
       put "Number of threads = " target_nthreads;
    rank=50;
-   number_of_obs=1000000;
-   number_of_var=5000;
+   number_of_obs=10000;
+   number_of_var=2000;
    sigma=0.1;
 
    call streaminit(1);
@@ -83,25 +83,25 @@ run;
 
 /* Extract principal components using the RANDOM and EIG methods */
 
-proc pca data=mycas.testdata n=25 method=random(niter=1);
+proc pca data=mylib.testdata n=25 method=random(niter=1 seed=6789);
    var x:;
    display Eigenvalues;
    displayout Eigenvalues=oneiter;
 run;
 
-proc pca data=mycas.testdata n=25 method=random(niter=5);
+proc pca data=mylib.testdata n=25 method=random(niter=5 seed=6789);
    var x:;
    display Eigenvalues;
    displayout Eigenvalues=fiveiter;
 run;
 
-proc pca data=mycas.testdata n=25 method=random(niter=10);
+proc pca data=mylib.testdata n=25 method=random(niter=10 seed=6789);
    var x:;
    display Eigenvalues;
    displayout Eigenvalues=teniter;
 run;
 
-proc pca data=mycas.testdata n=25 method=eig;
+proc pca data=mylib.testdata n=25 method=eig;
    var x:;
    display Eigenvalues;
    displayout Eigenvalues=trueeig;
@@ -109,10 +109,12 @@ run;
 
 /* merge data sets */
 
-data mycas.summary / sessref=mysess single=no;
+data mylib.summary;
    keep Number Eig Eig1 Eig5 Eig10;
-   merge mycas.oneiter(rename=(Eigenvalue=Eig1)) mycas.fiveiter(rename=(Eigenvalue=Eig5))
-         mycas.teniter(rename=(Eigenvalue=Eig10)) mycas.trueeig(rename=(Eigenvalue=Eig));
+   merge mylib.oneiter(rename=(Eigenvalue=Eig1))
+         mylib.fiveiter(rename=(Eigenvalue=Eig5))
+         mylib.teniter(rename=(Eigenvalue=Eig10))
+         mylib.trueeig(rename=(Eigenvalue=Eig));
    Number=_N_;
    label Eig1="Eigenvalue";
    label Eig5="Eigenvalue";
@@ -124,12 +126,12 @@ run;
 /* Plot eigenvalues for varying number of iterations */
 title 'Effect of Varying NITER';
 
-proc sgplot data=mycas.summary;
+proc sgplot data=mylib.summary;
    series y=Eig1 x=Number / markers legendlabel='1 Iteration';
    series y=Eig5 x=Number / markers legendlabel='5 Iterations';
    series y=Eig10 x=Number / markers legendlabel='10 Iterations';
    series y=Eig x=Number / markers legendlabel='True Eigenvalues';
    xaxis grid min=1 max=25;
-   yaxis grid min=60 max=120;
+   yaxis grid min=30 max=60;
 run;
 

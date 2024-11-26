@@ -156,12 +156,12 @@ data mortality;
     13   39  58   954.442
 ;
 
-data mycas.Mortality;
+data mylib.Mortality;
    set Mortality;
 run;
 
 ods graphics on;
-proc qtrselect data=mycas.Mortality;
+proc qtrselect data=mylib.Mortality;
    partition fraction(validate=0.3 seed=8);
    model DeathRate = aap aap*aap ajant ajant*ajant ajult
       ajult*ajult size65 size65*size65 nph nph*nph nsch25
@@ -171,8 +171,8 @@ proc qtrselect data=mycas.Mortality;
       / quantile=0.5;
    selection method=forward(choose=validate) sh=8 hier=single
       plot=all;
-   output out=mycas.OutData copyvar=DeathRate p=Pred role=Role;
+   output out=mylib.OutData copyvar=DeathRate p=Pred role=Role;
 run;
 
-proc print data=mycas.OutData(obs=10); run;
+proc print data=mylib.OutData(obs=10); run;
 

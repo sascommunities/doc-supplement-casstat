@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.ex3;
+data mylib.ex3;
    input cl1 $ x0  x1  x2  y $ freq id;
    datalines;
 a  2  .  7  n  2  1
@@ -29,10 +29,10 @@ b  1  6  4  o  1  9
 b  2  3  2  n  3  10
 ;
 
-proc binning data=mycas.ex3 numbin=5 woe;
+proc binning data=mylib.ex3 numbin=5 woe;
    input x1/numbin=4;
    input x2;
    target y/event="y";
-   output out=mycas.out3;
+   output out=mylib.out3;
 run;
 

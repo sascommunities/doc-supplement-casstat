@@ -13,7 +13,7 @@
 /****************************************************************/
 
 title 'Scatter Plot Smoothing';
-data mycas.Lidar;
+data mylib.Lidar;
    input Range LogRatio @@;
    datalines;
 390  -0.05035573    391  -0.06009706    393  -0.04190091    394   -0.0509847
@@ -74,29 +74,29 @@ data mycas.Lidar;
 720   -0.8026684
 ;
 
-proc sgplot data=mycas.Lidar;
+proc sgplot data=mylib.Lidar;
    scatter  x=Range y=LogRatio;
    loess    x=Range y=LogRatio / nomarkers;
    pbspline x=Range y=LogRatio / nomarkers;
 run;
 
-proc gammod data=mycas.Lidar seed=12345;
+proc gammod data=mylib.Lidar seed=12345;
    model LogRatio = spline(Range/details);
-   output out=mycas.LidarOut pred=p;
+   output out=mylib.LidarOut pred=p;
 run;
 
-proc gammod data=mycas.Lidar seed=12345;
+proc gammod data=mylib.Lidar seed=12345;
    model LogRatio = spline(Range/maxdf=20);
-   output out=mycas.LidarOut2 pred=p2;
+   output out=mylib.LidarOut2 pred=p2;
 run;
 
-proc gammod data=mycas.Lidar seed=12345;
+proc gammod data=mylib.Lidar seed=12345;
    model LogRatio = spline(Range/m=3);
-   output out=mycas.LidarOut3 pred=p3;
+   output out=mylib.LidarOut3 pred=p3;
 run;
 
 data LidarPred;
-   merge mycas.Lidar mycas.LidarOut mycas.LidarOut2 mycas.LidarOut3;
+   merge mylib.Lidar mylib.LidarOut mylib.LidarOut2 mylib.LidarOut3;
 run;
 proc sort data=LidarPred; by Range;run;
 proc sgplot data=LidarPred;

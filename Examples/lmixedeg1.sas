@@ -26,7 +26,7 @@
 %let no      = %eval(&ndye*&nrow*&ngene);
 %let tno     = %eval(&narray*&no);
 
-data mycas.microarray;
+data mylib.microarray;
    keep Gene MArray Dye Trt Pin Dip log2i;
    array PinDist{&tno};
    array DipDist{&tno};
@@ -110,7 +110,7 @@ data mycas.microarray;
 run;
 
 ods select Dimensions covParms SolutionR;
-proc lmixed data=mycas.microarray dmmethod=sparse;
+proc lmixed data=mylib.microarray dmmethod=sparse;
    class marray dye trt gene pin dip;
    model log2i = dye trt gene dye*gene trt*gene pin;
    random int gene dip pin/subject=marray s;

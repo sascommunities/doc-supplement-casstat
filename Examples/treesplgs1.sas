@@ -33,7 +33,7 @@ data Wine;
          Proline  = "Proline";
 run;
 
-data mycas.Wine;
+data mylib.Wine;
    set Wine;
 run;
 
@@ -41,7 +41,7 @@ proc print data=Wine(obs=10); run;
 
 ods graphics on;
 
-proc treesplit data=mycas.Wine seed=54321;
+proc treesplit data=mylib.Wine seed=54321;
    class Cultivar;
    model Cultivar = Alcohol Malic Ash Alkan Mg TotPhen Flav
                               NFPhen Cyanins Color Hue ODRatio Proline;

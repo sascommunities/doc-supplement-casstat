@@ -3,14 +3,14 @@
 /*                                                              */
 /*    NAME: NLMODEX1                                            */
 /*   TITLE: Documentation Example 1 for PROC NLMOD              */
-/* PRODUCT: VIYA Statistics                                     */
+/* PRODUCT: SAS Visual Statistics                               */
 /*    KEYS: Program logic flow, Continuity condition            */
 /*   PROCS: NLMOD                                               */
 /*    MISC: Logic Flow Example for PROC NLMOD Segmented Model   */
 /*                                                              */
 /****************************************************************/
 
-data mycas.A;
+data mylib.A;
    input y x @@;
    datalines;
 .46 1  .47  2 .57  3 .61  4 .62  5 .68  6 .69  7
@@ -18,7 +18,7 @@ data mycas.A;
 .80 15 .78 16
  ;
 
-proc nlmod data=mycas.A out=mycas.B;
+proc nlmod data=mylib.A out=mylib.B;
    parms alpha=.45 beta=.05 gamma=-.0025;
 
    x0 = -.5*beta / gamma;
@@ -38,7 +38,7 @@ proc nlmod data=mycas.A out=mycas.B;
 run;
 
 data B;
-   set mycas.B;
+   set mylib.B;
 run;
 
 proc sort data = B;

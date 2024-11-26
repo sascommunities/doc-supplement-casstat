@@ -16,7 +16,7 @@
 /*  Details Section: Class Variable Split Example              */
 /****************************************************************/
 
-data mycas.splitExample;
+data mylib.splitExample;
    length c2 $6;
    drop i;
    do i=1 to 1000;
@@ -31,7 +31,7 @@ data mycas.splitExample;
    end;
 run;
 
-proc qtrselect data=mycas.splitExample;
+proc qtrselect data=mylib.splitExample;
    class c1(split) c2(order=freq);
    model y = c1 c2 x1 x2;
    selection method=forward;
@@ -47,7 +47,7 @@ run;
 %let n=600;
 %let p=10;
 
-data mycas.roleExample;
+data mylib.roleExample;
    array x{&p} x1-x&p;
    length r $8;
    drop i j k;
@@ -68,7 +68,7 @@ data mycas.roleExample;
 run;
 
 
-proc qtrselect data=mycas.roleExample;
+proc qtrselect data=mylib.roleExample;
    model y = x1-x&p;
    selection method=forward(select=validate stop=sbc);
    partition rolevar=r(train='train' validate='validate' test='test');

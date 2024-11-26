@@ -15,7 +15,7 @@
 /****************************************************************/
 
 
-data mycas.inputData / single =yes;
+data mylib.inputData / single =yes;
    drop  j w1-w40;
 
   array x{40};
@@ -42,13 +42,13 @@ data mycas.inputData / single =yes;
 
 run;
 
-proc bart data=mycas.inputData seed=9181 trainInMem mapInMem;
+proc bart data=mylib.inputData seed=9181 trainInMem mapInMem;
    model y = x1-x40;
-   store mycas.modelFit;
+   store mylib.modelFit;
 run;
 
 
-data mycas.toScoreData / single =yes;
+data mylib.toScoreData / single =yes;
    drop  j w1-w40;
 
   array x{40};
@@ -75,18 +75,12 @@ data mycas.toScoreData / single =yes;
 
 run;
 
-proc cas;
-   action bart.bartScore /
-      table   = {name="toScoreData"}
-      restore = {name="modelFit"}
-      casOut  = {name="scoredData", replace=TRUE}
-      pred    = "predResp"
-      resid   = "residual";
-   run;
-quit;
+proc bart data=mylib.toScoreData restore=mylib.modelFit;
+   output out = mylib.scoredData pred = predResp resid = residual;
+run;
 
 data fitCheck;
-   set mycas.scoredData;
+   set mylib.scoredData;
    SquareError = residual * residual;
 run;
 
@@ -94,22 +88,13 @@ proc means data=fitCheck mean;
    var SquareError;
 run;
 
-proc cas;
-   action bart.bartScoreMargin /
-      table   = {name="inputData"}
-      restore = {name="modelFit"}
-      marginInfo = TRUE
-      margins= {
-        { name="Scenario1", at={{var="x2" value=0.25}}}
-        { name="Scenario2", at={{var="x2" value=0.25} {var="x3" value=0.5} }}
-        { name="x1Ref",     at={{var="x1" value=0.25}} }
-        { name="x1Evt1",    at={{var="x1" value=0.5}} }
-        { name="x1Evt2",    at={{var="x1" value=0.75}} }
-      }
-      differences = {
-        { label="x1:0.5 - 0.25" refMargin="x1Ref" evtMargin="x1Evt1"}
-        { label="x1:0.75 - 0.25" refMargin="x1Ref" evtMargin="x1Evt2"}
-      };
-   run;
-quit;
+proc bart restore = mylib.modelFit data=mylib.inputData;
+   margin "Scenario1" x2 = 0.25;
+   margin "Scenario2" x2 = 0.25 x3 = 0.5;
+   margin "x1Ref"     x1 = 0.25;
+   margin "x1Evt1"    x1 = 0.5;
+   margin "x1Evt2"    x1 = 0.75;
+   margindiff event = "x1Evt1" ref = "x1Ref" / label= "x1:0.5 - 0.25";
+   margindiff event = "x1Evt2" ref = "x1Ref" / label= "x1:0.75 - 0.25";
+run;
 

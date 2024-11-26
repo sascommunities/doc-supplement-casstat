@@ -3,14 +3,14 @@
 /*                                                              */
 /*    NAME: NLMODGS2                                            */
 /*   TITLE: Getting Started Example for PROC NLMOD              */
-/* PRODUCT: VIYA Statistics                                     */
+/* PRODUCT: SAS Visual Statistics                               */
 /*    KEYS: Binary Likelihood,  Cancer Remission                */
 /*   PROCS: NLMOD                                               */
 /*    MISC: Estimating the Parameters using Maximum Likelihood  */
 /*                                                              */
 /****************************************************************/
 
-data mycas.Remiss;
+data mylib.Remiss;
    input remiss cell smear infil li blast temp;
    label remiss = 'complete remission';
    like = 0;
@@ -45,7 +45,7 @@ data mycas.Remiss;
  0 1    .73 .73 0.7 0.398  .986
  ;
 
-proc nlmod data=mycas.Remiss corr;
+proc nlmod data=mylib.Remiss corr;
    parms int=-10 a=-2 b=-1 c=6;
    linp = int + a*cell + b*li + c*temp;
    p = probnorm(linp);

@@ -25,7 +25,7 @@ these data.
 
 title 'Getting Started: Poisson Regression';
 
-data mycas.getStarted;
+data mylib.getStarted;
   input C1-C5 Y Total;
   datalines;
 0 3 1 1 3 2 28.361
@@ -130,7 +130,7 @@ data mycas.getStarted;
 0 3 2 1 2 0 0.000
 ;
 
-proc genselect data=mycas.getStarted;
+proc genselect data=mylib.getStarted;
    class C1-C5;
    model Y = C1-C5 /  Distribution=Poisson Link=Log;
 run;

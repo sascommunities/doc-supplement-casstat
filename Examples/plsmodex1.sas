@@ -191,20 +191,20 @@ tyro2   TEST 0.0001 0.0001
  -4.668 -4.668 -4.865 -4.865 -5.109 -5.111
 ;
 
-data mycas.ex1Data;
+data mylib.ex1Data;
    set ex1Data;
 run;
 
 /* Fit PLS model with 10 factors */
 
-proc plsmod data=mycas.ex1Data nfac=10;
+proc plsmod data=mylib.ex1Data nfac=10;
    model tot_log tyr_log try_log = f1-f30;
 run;
 
 /* Choose the number of factors by test set validation with */
 /* significance testing.                                    */
 
-proc plsmod data=mycas.ex1Data nfac=10 cvtest(stat=press seed=12345);
+proc plsmod data=mylib.ex1Data nfac=10 cvtest(stat=press seed=12345);
    model tot_log tyr_log try_log = f1-f30;
    partition roleVar = Role(train='TRAIN' test='TEST');
 run;

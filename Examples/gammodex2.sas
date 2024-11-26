@@ -284,13 +284,13 @@ data DiabetesStudy;
  1  118  58  36  33.3  0.261  23  0  1    8  155  62  26    34  0.543  46  1  0
 ;
 
-data mycas.DiabetesStudy;
+data mylib.DiabetesStudy;
    set DiabetesStudy;
    Result = Diabetes;
    if Test=1 then Result=.;
 run;
 
-proc gammod data=mycas.DiabetesStudy seed=12345;
+proc gammod data=mylib.DiabetesStudy seed=12345;
    model Result(event='1') = spline(NPreg)    spline(Glucose)
                              spline(Pressure) spline(Triceps)
                              spline(BMI)      spline(Pedigree)
@@ -298,14 +298,14 @@ proc gammod data=mycas.DiabetesStudy seed=12345;
 run;
 
 ods graphics on;
-proc gammod data=mycas.DiabetesStudy plots seed=12345;
+proc gammod data=mylib.DiabetesStudy plots seed=12345;
    model Result(event='1') = spline(Glucose)
                              spline(Pedigree) spline(Age) / dist=binary;
-   output out=mycas.DiabetesStudyOut copyvars=(Diabetes Test);
+   output out=mylib.DiabetesStudyOut copyvars=(Diabetes Test);
 run;
 
 data test;
-   set mycas.DiabetesStudyOut(where=(Test=1));
+   set mylib.DiabetesStudyOut(where=(Test=1));
    if ((Pred>0.5 & Diabetes=1) | (Pred<0.5 & Diabetes=0))
    then Error=0;
    else Error=1;

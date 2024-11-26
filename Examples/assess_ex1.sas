@@ -14,7 +14,7 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.score2;
+data mylib.score2;
    length good_bad $4;
    input _PartInd_ good_bad p_good p_bad;
    datalines;
@@ -49,7 +49,7 @@ data mycas.score2;
 1 good 0.5500 0.4500
 ;
 
-proc assess data=mycas.score2 ncuts=5 nbins=5;
+proc assess data=mylib.score2 ncuts=5 nbins=5;
    var p_good;
    target good_bad / event="good" level=nominal;
    fitstat pvar=p_bad / pevent="bad" ;

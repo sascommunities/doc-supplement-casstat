@@ -16,7 +16,7 @@ title 'Nonparametric Tweedie Model';
 %let phi=0.4;
 %let power=1.5;
 
-data mycas.one;
+data mylib.one;
    do i=1 to 1000;
 
       /* Sample the predictors */
@@ -52,15 +52,15 @@ data mycas.one;
    end;
 run;
 
-proc genselect data=mycas.one;
+proc genselect data=mylib.one;
    model y=x1 x2 x3 x4/dist=tweedie;
 run;
 
-proc gammod data=mycas.one seed=1234;
+proc gammod data=mylib.one seed=1234;
    model y=param(x1 x2 x3 x4)/dist=tweedie;
 run;
 
-proc gammod data=mycas.one seed=1234 plots;
+proc gammod data=mylib.one seed=1234 plots;
    model y=spline(x1) spline(x2) spline(x3) spline(x4)/dist=tweedie;
 run;
 

@@ -12,7 +12,7 @@
 /*                                                              */
 /****************************************************************/
 
-data mycas.StableProcesses;
+data mylib.StableProcesses;
    length processname $16 subgroupname $8;
    processname = 'Amount';
    subgroupname = 'Batch';
@@ -65,7 +65,7 @@ data mycas.StableProcesses;
    drop i;
 run;
 
-proc spc data=mycas.StableProcesses limits=mycas.AllLimits;
+proc spc data=mylib.StableProcesses limits=mylib.AllLimits;
    xrchart;
 run;
 

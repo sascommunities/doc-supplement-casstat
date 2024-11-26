@@ -15,7 +15,7 @@
 
 title 'Getting Started: Independent Component Analysis';
 
-data mycas.sample;
+data mylib.sample;
    keep t x:;
    array S[200,3];     /* S: source signals */
    array A[3,3];       /* A: mixing matrix */
@@ -47,8 +47,8 @@ data mycas.sample;
    end;
 run;
 
-proc ica data=mycas.sample seed=345;
+proc ica data=mylib.sample seed=345;
    var x1-x3;
-   output out=mycas.scores component=c copyvar=t;
+   output out=mylib.scores component=c copyvar=t;
 run;
 

@@ -14,22 +14,22 @@
 /*    MISC:                                                     */
 /****************************************************************/
 
-data mycas.iris;
+data mylib.iris;
    set sashelp.iris;
 run;
 
-proc cardinality data=mycas.iris outcard=mycas.card
-                 outdetails=mycas.details maxlevels=100;
+proc cardinality data=mylib.iris outcard=mylib.card
+                 outdetails=mylib.details maxlevels=100;
 run;
 
 
-proc print data=mycas.card;
+proc print data=mylib.card;
    var _varname_ _type_ _cardinality_ _more_ _visible_ _min_ _max_;
 run;
 
 data sp;
    label _cfmt_='Formatted Value of the Variable \Variable{SepalLength}';
-   set mycas.details( where=(_varname_='SepalLength'));
+   set mylib.details( where=(_varname_='SepalLength'));
    if _index_ = . then do;
       _cfmt_=cats(">",left(_cfmt_));
    end;
@@ -40,13 +40,13 @@ proc sgplot data=sp;
    vbar _cfmt_ / freq=_freq_;
 run;
 
-proc cardinality data=mycas.iris outcard=mycas.card
-                 outdetails=mycas.details maxlevels=5;
+proc cardinality data=mylib.iris outcard=mylib.card
+                 outdetails=mylib.details maxlevels=5;
 run;
 
 data sp;
    label _cfmt_='Formatted Value of the Variable SepalLength';
-   set mycas.details( where=(_varname_='SepalLength'));
+   set mylib.details( where=(_varname_='SepalLength'));
    if _index_ = . then do;
       _cfmt_=cats(">",left(_cfmt_));
    end;

@@ -30,7 +30,7 @@ four additives and the columns are the nine levels of the rating scale.
 
 title 'Example 4: Ordinal Logistic Regression';
 
-data mycas.Cheese;
+data mylib.Cheese;
    do Additive = 1 to 4;
       do y = 1 to 9;
          input freq @@;
@@ -45,13 +45,13 @@ data mycas.Cheese;
 0  0  0  1  3  7 14 16 11
 ;
 
-proc logselect data=mycas.Cheese;
+proc logselect data=mylib.Cheese;
    freq freq;
    class Additive(ref='4') / param=ref;
    model y=Additive;
 run;
 
-data mycas.Cheese;
+data mylib.Cheese;
    do Additive = 1 to 4;
       input y1-y9;
       output;
@@ -63,7 +63,7 @@ data mycas.Cheese;
 0  0  0  1  3  7 14 16 11
 ;
 
-proc logselect data=mycas.Cheese;
+proc logselect data=mylib.Cheese;
    class Additive(ref='4') / param=ref;
    model y1-y9=Additive;
 run;

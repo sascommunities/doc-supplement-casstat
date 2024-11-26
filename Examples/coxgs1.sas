@@ -28,7 +28,7 @@ is fitted to these data.
 
 title 'Getting Started: Cox Regression';
 
-data mycas.getStarted;
+data mylib.getStarted;
    input Time Status C1$ C2 C3$ X1-X4;
    datalines;
    53       0      Low          1    M     1.11    2.000    3.6128    12.0
@@ -133,7 +133,7 @@ data mycas.getStarted;
    89       1      High         1    M     1.32    1.623    3.6532    14.0
 ;
 
-proc phselect data=mycas.getStarted ithist;
+proc phselect data=mylib.getStarted ithist;
    class C1-C3;
    model Time*Status(0) = C1-C3 X1-X4;
 run;

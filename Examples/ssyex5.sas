@@ -37,7 +37,7 @@ run;
 /---------------------------------------------------------------------*/
 
 %let N = 1000000;
-data mycas.Parm; set Parm; run;
+data mylib.Parm; set Parm; run;
 proc ds2 sessref=mysess;
 data Sim / overwrite=yes;
    dcl int i;
@@ -66,10 +66,10 @@ enddata;
 run;
 quit;
 
-proc mdsummary data=mycas.Sim;
+proc mdsummary data=mylib.Sim;
    var y;
    groupby Family Notes Mean StdDev Skewness Kurtosis;
-   output out=mycas.Sim_summary;
+   output out=mylib.Sim_summary;
 run;
 
 proc cas;
@@ -87,7 +87,7 @@ proc cas;
       set={{var="sKurtosis" value="sKurtosis + 3"}};
 quit;
 
-proc sort data=mycas.Sim_summary out=Sim_summary; by Family; run;
+proc sort data=mylib.Sim_summary out=Sim_summary; by Family; run;
 proc print data=Sim_summary noobs;
    var Family Mean sMean StdDev sStdDev Skewness sSkewness Kurtosis sKurtosis;
    format _NUMERIC_ 6.3;
@@ -109,7 +109,7 @@ proc simsystem system=johnson;
 run;
 
 %let N = 1000000;
-data mycas.Parm; set Parm; run;
+data mylib.Parm; set Parm; run;
 proc ds2 sessref=mysess;
 data Sim / overwrite=yes;
    dcl int i;
@@ -134,10 +134,10 @@ enddata;
 run;
 quit;
 
-proc mdsummary data=mycas.Sim;
+proc mdsummary data=mylib.Sim;
    var y;
    groupby Family Mean StdDev Skewness Kurtosis;
-   output out=mycas.Sim_summary;
+   output out=mylib.Sim_summary;
 run;
 
 proc cas;
@@ -155,7 +155,7 @@ proc cas;
       set={{var="sKurtosis" value="sKurtosis + 3"}};
 quit;
 
-proc sort data=mycas.Sim_summary out=Sim_summary; by Family; run;
+proc sort data=mylib.Sim_summary out=Sim_summary; by Family; run;
 proc print data=Sim_summary noobs;
    var Family Mean sMean StdDev sStdDev Skewness sSkewness Kurtosis sKurtosis;
    format _NUMERIC_ 6.3;

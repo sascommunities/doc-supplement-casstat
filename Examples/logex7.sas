@@ -35,11 +35,11 @@ uninterrupted sequences of capital letters in emails.
 
 title 'Example 7: Restoring a Stored Model';
 
-data mycas.JunkMail;
+data mylib.JunkMail;
    set Sashelp.JunkMail;
 run;
 
-proc logselect data=mycas.JunkMail;
+proc logselect data=mylib.JunkMail;
    model Class(event='1')=Make Address All _3d Our Over Remove Internet Order
          Mail Receive Will People Report Addresses Free Business Email You
          Credit Your Font _000 Money HP HPL George _650 Lab Labs Telnet _857
@@ -48,23 +48,23 @@ proc logselect data=mycas.JunkMail;
          Dollar Pound CapAvg CapLong CapTotal;
    display / excludeall;
    selection method=forward(maxstep=5);
-   store mycas.mymodel /
+   store mylib.mymodel /
          note="Generated with stepwise selection.";
 run;
 
-proc logselect restore=mycas.mymodel stb clb corrb covb type3;
+proc logselect restore=mylib.mymodel stb clb corrb covb type3;
    code;
    oddsratio;
 run;
 
-proc logselect restore=mycas.mymodel data=mycas.JunkMail
+proc logselect restore=mylib.mymodel data=mylib.JunkMail
    association ctable(cutpt=0.1 to 0.9 by 0.1) lackfit partfit;
-   output out=mycas.out p cbar;
-proc print data=mycas.out(obs=1);
+   output out=mylib.out p cbar;
+proc print data=mylib.out(obs=1);
 run;
 
-proc logselect restore=mycas.mymodel data=mycas.JunkMail fitdata;
-   output out=mycas.out p cbar;
-proc print data=mycas.out(obs=1);
+proc logselect restore=mylib.mymodel data=mylib.JunkMail fitdata;
+   output out=mylib.out p cbar;
+proc print data=mylib.out(obs=1);
 run;
 

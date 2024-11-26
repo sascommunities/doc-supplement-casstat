@@ -14,11 +14,11 @@
 /*                                                             */
 /***************************************************************/
 
-data mycas.iris;
+data mylib.iris;
    set sashelp.iris;
 run;
 
-proc kclus data=mycas.iris maxclusters=9 seed=1234
+proc kclus data=mylib.iris maxclusters=9 seed=1234
            NOC=ABC(B=10 minclusters=2 align=PCA criterion=FIRSTPEAK);
    input SepalLength SepalWidth PetalLength PetalWidth;
    ods output ABCStats=ABCStats1;
