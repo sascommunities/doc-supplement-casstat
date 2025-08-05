@@ -1,7 +1,7 @@
 
 
 data mylib.dataForTrain / single=yes;
-   drop j;
+   drop i;
    array x{5};
    array z{2};
    call streaminit(6520);
