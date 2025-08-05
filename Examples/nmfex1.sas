@@ -36,6 +36,28 @@ data mylib.ex1Data;
       Serves as the basis for innovation causing revenue growth.         | 16
 run;
 
+data mylib.en_stoplist;
+   length Term $16;
+   input Term;
+   datalines;
+about
+and
+are
+as
+between
+for
+from
+in
+is
+of
+or
+than
+the
+this
+to
+with
+;
+
 proc textmine data=mylib.ex1Data;
    doc_id     did;
    variables  text;
