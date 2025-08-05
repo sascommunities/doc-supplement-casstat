@@ -12,7 +12,9 @@
 /*                                                              */
 /****************************************************************/
 
-proc shewhart table=mylib.RandomTests(where=(_VAR_ eq 'Process047'));
+data RandomTests;
+   set mylib.RandomTests;
+proc shewhart table=RandomTests(where=(_VAR_ eq 'Process047'));
    xchart Process047 * Subgroup /
             tests = 1 to 4
             markers;
