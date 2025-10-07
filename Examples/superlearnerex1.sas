@@ -41,7 +41,7 @@ run;
 
 
 data mylib.dataForScore / single=yes;
-   drop j;
+   drop i;
    array x{5};
    array z{2};
    call streaminit(2456);
